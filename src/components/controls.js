@@ -1,6 +1,14 @@
 import React from 'react'
 
-const Controls = ({ level, handleEvent, team1, team2, disableScore, disableUndo, disableHalf }) => (
+const Controls = ({
+  level,
+  handleEvent,
+  team1,
+  team2,
+  disableScore,
+  disableUndo,
+  disableHalf,
+}) => (
   <div>
     {level === 3 && (
       <button id="pass" onClick={handleEvent}>

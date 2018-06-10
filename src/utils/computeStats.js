@@ -52,9 +52,10 @@ const compute = events => {
           ? total.away.passes + 1
           : total.away.passes
 
-    const newPoints =
-      ['score', 'homeScore', 'awayScore'].includes(event.trigger)
-        ? [
+    const newPoints = ['score', 'homeScore', 'awayScore'].includes(
+      event.trigger
+    )
+      ? [
           ...total.points,
           {
             home: {
@@ -69,9 +70,9 @@ const compute = events => {
             },
           },
         ]
-        : event.trigger === 'half'
-          ? [...total.points, 'half']
-          : total.points
+      : event.trigger === 'half'
+        ? [...total.points, 'half']
+        : total.points
 
     const newHomeHasDisc =
       event.trigger === 'half'

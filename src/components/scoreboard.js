@@ -1,14 +1,15 @@
 import React from 'react'
+import Typography from '@material-ui/core/Typography'
 
 const Scoreboard = ({ title, team1, team2, homeScore, awayScore }) => (
   <div>
-    <h3>{title}</h3>
-    <h4>
+    <Typography variant="subheading">{title}</Typography>
+    <Typography variant="title">
       {team1} vs {team2}
-    </h4>
-    <h4>
+    </Typography>
+    <Typography>
       {homeScore} - {awayScore}
-    </h4>
+    </Typography>
   </div>
 )
 

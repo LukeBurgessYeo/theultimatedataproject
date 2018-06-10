@@ -1,12 +1,13 @@
 import React from 'react'
 import { navigateTo } from 'gatsby-link'
+import SwipeableViews from 'react-swipeable-views'
 import compute from '../../utils/computeStats'
-import Settings from '../../components/settings'
-import Scoreboard from '../../components/scoreboard'
-import Controls from '../../components/controls'
-import PointsTable from '../../components/points'
+import GameHeader from '../../components/gameHeader'
+import SettingsView from '../../components/settingsView'
+import ScoreView from '../../components/scoreView'
+import StatsView from '../../components/statsView'
 
-class IndexPage extends React.Component {
+class GamePage extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -16,6 +17,7 @@ class IndexPage extends React.Component {
       team2: 'Team 2',
       level: 3,
       showSettings: false,
+      value: 0,
     }
   }
 
@@ -46,8 +48,20 @@ class IndexPage extends React.Component {
     const game = updated.filter(
       g => g.id === window.location.pathname.split('/')[2]
     )[0]
-    updated[updated.indexOf(game)].data = JSON.stringify(this.state)
-    localStorage.setItem('games', JSON.stringify(updated))
+    if (game) {
+      updated[updated.indexOf(game)].data = JSON.stringify(this.state)
+      localStorage.setItem('games', JSON.stringify(updated))
+    } else {
+      navigateTo('/')
+    }
+  }
+
+  handleTabChange = (event, value) => {
+    this.setState({ value })
+  }
+
+  handleChangeIndex = index => {
+    this.setState({ value: index })
   }
 
   handleChange = e => {
@@ -92,72 +106,98 @@ class IndexPage extends React.Component {
   }
 
   render() {
+    const {
+      events,
+      level,
+      team1,
+      team2,
+      title,
+      value,
+      showSettings,
+    } = this.state
+    const { transition } = this.props
     const { points, home, away, homeHasDisc, homeOffense, firstHalf } = compute(
-      this.state.events
+      events
     )
 
-    const disableScore = this.state.level === 3
-      && (this.state.events.length === 0
-        || ['score', 'half'].includes(this.state.events.slice(-1).pop().trigger))
+    const disableScore =
+      level === 3 &&
+      (events.length === 0 ||
+        ['score', 'half'].includes(events.slice(-1).pop().trigger))
 
-    const disableHalf = !firstHalf
-      || points.length === 0
-      || !['score', 'homeScore', 'awayScore'].includes(this.state.events.slice(-1).pop().trigger)
+    const disableHalf =
+      !firstHalf ||
+      points.length === 0 ||
+      !['score', 'homeScore', 'awayScore'].includes(
+        events.slice(-1).pop().trigger
+      )
 
-    const tempDisplay = (
-      <div>
-        <br />
-        <br />
-        <p>
-          {homeOffense ? this.state.team1 : this.state.team2} is on offense this
-          point.
-        </p>
-        <p>{homeHasDisc ? this.state.team1 : this.state.team2} has the disc.</p>
-        <p>
-          Passes: {home.passes}, {away.passes}
-        </p>
-        <p>
-          Turns: {home.turns}, {away.turns}
-        </p>
-      </div>
+    const scoreView = (
+      <ScoreView
+        title={title}
+        team1={team1}
+        team2={team2}
+        homeScore={home.score}
+        awayScore={away.score}
+        level={level}
+        handleEvent={this.handleEvent}
+        disableScore={disableScore}
+        disableUndo={events.length === 0}
+        disableHalf={disableHalf}
+        homeOffense={homeOffense}
+        homeHasDisc={homeHasDisc}
+        homePasses={home.passes}
+        awayPasses={away.passes}
+        homeTurns={home.turns}
+        awayTurns={away.turns}
+      />
+    )
+
+    const stats = <StatsView points={points} />
+
+    const settingsView = (
+      <SettingsView
+        display={showSettings}
+        disabled={events.length > 0}
+        title={title}
+        handleChange={this.handleChange}
+        team1={team1}
+        team2={team2}
+        switchSides={this.switchSides}
+        level={level}
+        deleteGame={this.deleteGame}
+      />
+    )
+
+    const header = (
+      <GameHeader
+        disabled={events.length > 0}
+        toggleSettings={this.toggleSettings}
+        title={title}
+        handleChange={this.handleChange}
+        team1={team1}
+        team2={team2}
+        switchSides={this.switchSides}
+        level={level}
+        deleteGame={this.deleteGame}
+        value={value}
+        handleTabChange={this.handleTabChange}
+      />
     )
 
     return (
       <div>
-        <Settings
-          toggleSettings={this.toggleSettings}
-          disabled={this.state.events.length > 0}
-          display={this.state.showSettings ? 'block' : 'none'}
-          title={this.state.title}
-          handleChange={this.handleChange}
-          team1={this.state.team1}
-          team2={this.state.team2}
-          switchSides={this.switchSides}
-          level={this.state.level}
-          deleteGame={this.deleteGame}
-        />
-        <hr />
-        <Scoreboard
-          title={this.state.title}
-          team1={this.state.team1}
-          team2={this.state.team2}
-          homeScore={home.score}
-          awayScore={away.score}
-        />
-        <Controls
-          level={this.state.level}
-          handleEvent={this.handleEvent}
-          team1={this.state.team1}
-          team2={this.state.team2}
-          disableScore={disableScore}
-          disableUndo={this.state.events.length === 0}
-          disableHalf={disableHalf}
-        />
-        {tempDisplay}
-        <PointsTable points={points} />
+        {header}
+        {settingsView}
+        <div style={transition && transition.style}>
+          <SwipeableViews index={value} onChangeIndex={this.handleChangeIndex}>
+            {scoreView}
+            {stats}
+          </SwipeableViews>
+        </div>
       </div>
     )
   }
 }
 
-export default IndexPage
+export default GamePage

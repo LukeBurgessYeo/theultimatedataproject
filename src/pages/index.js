@@ -1,8 +1,9 @@
 import React from 'react'
-import Link from 'gatsby-link'
 import uuidv1 from 'uuid/v1'
+import Header from '../components/header'
+import GameCard from '../components/gamecard'
 
-export default class HomePage extends React.Component {
+class HomePage extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -12,7 +13,9 @@ export default class HomePage extends React.Component {
   }
 
   componentDidMount = () => {
-    const games = JSON.parse(localStorage.getItem('games'))
+    const games = localStorage.getItem('games')
+      ? JSON.parse(localStorage.getItem('games'))
+      : false
     if (games && games.length > 0) {
       let id = uuidv1().split('-')[0]
       while (games.filter(game => game.id === id).length > 0) {
@@ -25,23 +28,32 @@ export default class HomePage extends React.Component {
   }
 
   render() {
+    const { transition } = this.props
+
     return (
       <div>
-        <h1>Basic Ulti Stats</h1>
-        <p>Welcome to the home page</p>
-        <Link to={`/games/${this.state.newId}`}>
-          Click here to create a new game
-        </Link>
-        <ul>
-          {this.state.games.length > 0 &&
-            this.state.games.map(game => (
-              <li key={game.id}>
-                Title: {JSON.parse(game.data).title},{' '}
-                <Link to={`/games/${game.id}`}>view</Link>
-              </li>
-            ))}
-        </ul>
+        <Header siteTitle="Stats Tracker" />
+        <div
+          style={{
+            margin: '0 auto',
+            maxWidth: 960,
+            padding: '0px 1.0875rem 1.45rem',
+            paddingTop: 0,
+          }}
+        >
+          <div style={transition && transition.style}>
+            <GameCard game={`/games/${this.state.newId}`} />
+            <div>
+              {this.state.games.length > 0 &&
+                this.state.games
+                  .reverse()
+                  .map(game => <GameCard key={game.id} game={game} />)}
+            </div>
+          </div>
+        </div>
       </div>
     )
   }
 }
+
+export default HomePage

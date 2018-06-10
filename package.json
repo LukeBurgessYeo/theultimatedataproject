@@ -4,11 +4,16 @@
   "version": "1.0.0",
   "author": "Kyle Mathews <mathews.kyle@gmail.com>",
   "dependencies": {
+    "@material-ui/core": "^1.2.0",
+    "@material-ui/icons": "^1.1.0",
     "gatsby": "^1.9.270",
     "gatsby-link": "^1.6.40",
     "gatsby-plugin-create-client-paths": "^1.0.8",
     "gatsby-plugin-react-helmet": "^2.0.10",
+    "gatsby-plugin-react-next": "^1.0.11",
     "react-helmet": "^5.2.0",
+    "react-swipeable-views": "^0.12.13",
+    "react-transition-group": "^2.3.1",
     "uuid": "^3.2.1"
   },
   "keywords": [
