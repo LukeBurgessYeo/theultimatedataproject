@@ -74,7 +74,7 @@ class HomePage extends React.Component {
             </Link>
             <div>
               {this.state.games.length > 0 &&
-                this.state.games
+                [...this.state.games]
                   .reverse()
                   .map(game => <GameCard key={game.id} game={game} />)}
             </div>
