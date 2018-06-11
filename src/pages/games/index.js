@@ -6,6 +6,7 @@ import GameHeader from '../../components/gameHeader'
 import SettingsView from '../../components/settingsView'
 import ScoreView from '../../components/scoreView'
 import StatsView from '../../components/statsView'
+import withRoot from '../../utils/withRoot'
 
 class GamePage extends React.Component {
   constructor(props) {
@@ -200,4 +201,4 @@ class GamePage extends React.Component {
   }
 }
 
-export default GamePage
+export default withRoot(GamePage)

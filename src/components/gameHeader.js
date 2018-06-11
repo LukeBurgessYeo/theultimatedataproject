@@ -7,6 +7,7 @@ import IconButton from '@material-ui/core/IconButton'
 import Tabs from '@material-ui/core/Tabs'
 import Tab from '@material-ui/core/Tab'
 import { withStyles } from '@material-ui/core/styles'
+import withRoot from '../utils/withRoot'
 
 const styles = {
   indicator: {
@@ -55,4 +56,4 @@ const GameHeader = ({ classes, toggleSettings, value, handleTabChange }) => (
   </div>
 )
 
-export default withStyles(styles)(GameHeader)
+export default withRoot(withStyles(styles)(GameHeader))
