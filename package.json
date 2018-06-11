@@ -12,6 +12,7 @@
     "gatsby-plugin-react-helmet": "^2.0.10",
     "gatsby-plugin-react-next": "^1.0.11",
     "react-helmet": "^5.2.0",
+    "react-jss": "^8.5.0",
     "react-swipeable-views": "^0.12.13",
     "react-transition-group": "^2.3.1",
     "uuid": "^3.2.1"

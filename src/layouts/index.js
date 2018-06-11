@@ -5,7 +5,7 @@ import Helmet from 'react-helmet'
 import './index.css'
 
 const Layout = ({ children, data }) => (
-  <div>
+  <div style={{ backgroundColor: '#EAEAEA' }}>
     <Helmet
       title={data.site.siteMetadata.title}
       meta={[

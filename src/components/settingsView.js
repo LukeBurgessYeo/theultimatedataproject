@@ -16,8 +16,6 @@ const inputStyles = {
   marginBottom: '16px',
 }
 
-const options = ['Score', 'Score + Turnovers', 'Score + Turnovers + Passes']
-
 const GameSettings = ({
   display,
   title,
@@ -28,56 +26,56 @@ const GameSettings = ({
   level,
   deleteGame,
 }) => (
-  <Card
-    className={display ? [Styles.show, Styles.hide].join(' ') : Styles.hide}
-  >
-    <CardContent>
-      <FormControl style={inputStyles}>
-        <InputLabel htmlFor="title">Title</InputLabel>
-        <Input id="title" value={title} onChange={handleChange} />
-      </FormControl>
-      <div style={{ marginBottom: inputStyles.marginBottom }}>
-        <FormControl style={{ width: '40%' }}>
-          <InputLabel htmlFor="team1">Starting Offense:</InputLabel>
-          <Input id="team1" value={team1} onChange={handleChange} />
+    <Card
+      className={display ? [Styles.show, Styles.hide].join(' ') : Styles.hide}
+    >
+      <CardContent>
+        <FormControl style={inputStyles}>
+          <InputLabel htmlFor="title">Title</InputLabel>
+          <Input id="title" value={title} onChange={handleChange} />
         </FormControl>
-        <span
-          style={{ display: 'inline-block', textAlign: 'center', width: '20%' }}
-        >
-          <IconButton onClick={switchSides}>
-            <SwapHoriz />
-          </IconButton>
-        </span>
-        <FormControl style={{ width: '40%' }}>
-          <InputLabel htmlFor="team2">Starting Defense:</InputLabel>
-          <Input id="team2" value={team2} onChange={handleChange} />
+        <div style={{ marginBottom: inputStyles.marginBottom }}>
+          <FormControl style={{ width: '40%' }}>
+            <InputLabel htmlFor="team1">Starting Offense:</InputLabel>
+            <Input id="team1" value={team1} onChange={handleChange} />
+          </FormControl>
+          <span
+            style={{ display: 'inline-block', textAlign: 'center', width: '20%' }}
+          >
+            <IconButton onClick={switchSides}>
+              <SwapHoriz />
+            </IconButton>
+          </span>
+          <FormControl style={{ width: '40%' }}>
+            <InputLabel htmlFor="team2">Starting Defense:</InputLabel>
+            <Input id="team2" value={team2} onChange={handleChange} />
+          </FormControl>
+        </div>
+        <FormControl style={inputStyles}>
+          <InputLabel htmlFor="level">Track Which Stats?</InputLabel>
+          <Select
+            value={level}
+            onChange={handleChange}
+            inputProps={{
+              name: 'level',
+              id: 'level',
+            }}
+          >
+            <MenuItem value={1}>Score</MenuItem>
+            <MenuItem value={2}>Score + Turnovers</MenuItem>
+            <MenuItem value={3}>Score + Turnoers + Passes</MenuItem>
+          </Select>
         </FormControl>
-      </div>
-      <FormControl style={inputStyles}>
-        <InputLabel htmlFor="level">Track Which Stats?</InputLabel>
-        <Select
-          value={level}
-          onChange={handleChange}
-          inputProps={{
-            name: 'level',
-            id: 'level',
-          }}
+        <Button
+          disabled={false}
+          variant="outlined"
+          color="secondary"
+          onClick={deleteGame}
         >
-          <MenuItem value={1}>Score</MenuItem>
-          <MenuItem value={2}>Score + Turnovers</MenuItem>
-          <MenuItem value={3}>Score + Turnoers + Passes</MenuItem>
-        </Select>
-      </FormControl>
-      <Button
-        disabled={true}
-        variant="outlined"
-        color="secondary"
-        onClick={deleteGame}
-      >
-        Delete Game
+          Delete Game
       </Button>
-    </CardContent>
-  </Card>
-)
+      </CardContent>
+    </Card>
+  )
 
 export default GameSettings
