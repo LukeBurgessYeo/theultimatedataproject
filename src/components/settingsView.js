@@ -18,6 +18,7 @@ const inputStyles = {
 
 const GameSettings = ({
   display,
+  disabled,
   title,
   handleChange,
   team1,
@@ -56,6 +57,7 @@ const GameSettings = ({
           <Select
             value={level}
             onChange={handleChange}
+            disabled={disabled}
             inputProps={{
               name: 'level',
               id: 'level',

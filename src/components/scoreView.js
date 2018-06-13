@@ -22,38 +22,32 @@ const ScoreView = ({
   homeTurns,
   awayTurns,
 }) => (
-  <Card style={{ marginTop: '1.45rem' }}>
-    <CardContent style={{ textAlign: 'center' }}>
-      <Scoreboard
-        title={title}
-        team1={team1}
-        team2={team2}
-        homeScore={homeScore}
-        awayScore={awayScore}
-      />
-      <Controls
-        level={level}
-        handleEvent={handleEvent}
-        team1={team1}
-        team2={team2}
-        disableScore={disableScore}
-        disableUndo={disableUndo}
-        disableHalf={disableHalf}
-      />
-      <div>
-        <br />
-        <br />
-        <p>{homeOffense ? team1 : team2} is on offense this point.</p>
-        <p>{homeHasDisc ? team1 : team2} has the disc.</p>
-        <p>
-          Passes: {homePasses}, {awayPasses}
-        </p>
-        <p>
-          Turns: {homeTurns}, {awayTurns}
-        </p>
-      </div>
-    </CardContent>
-  </Card>
-)
+    <Card style={{ marginTop: '1.45rem' }}>
+      <CardContent style={{ textAlign: 'center' }}>
+        <Scoreboard
+          title={title}
+          team1={team1}
+          team2={team2}
+          homeScore={homeScore}
+          awayScore={awayScore}
+          homeOffense={homeOffense}
+          homeHasDisc={homeHasDisc}
+        />
+        <Controls
+          level={level}
+          handleEvent={handleEvent}
+          team1={team1}
+          team2={team2}
+          disableScore={disableScore}
+          disableUndo={disableUndo}
+          disableHalf={disableHalf}
+          homePasses={homePasses}
+          awayPasses={awayPasses}
+          homeTurns={homeTurns}
+          awayTurns={awayTurns}
+        />
+      </CardContent>
+    </Card>
+  )
 
 export default ScoreView
