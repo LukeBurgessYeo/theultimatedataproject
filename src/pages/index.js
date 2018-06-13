@@ -2,8 +2,8 @@ import React from 'react'
 import uuidv1 from 'uuid/v1'
 import Link from 'gatsby-link'
 import Typography from '@material-ui/core/Typography'
-import Card from '@material-ui/core/Card'
-import CardContent from '@material-ui/core/CardContent'
+import AddIcon from '@material-ui/icons/Add'
+import Button from '@material-ui/core/Button'
 import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
 import GameCard from '../components/gamecard'
@@ -59,19 +59,15 @@ class HomePage extends React.Component {
           }}
         >
           <div style={transition && transition.style}>
-            <Link to={`/games/${this.state.newId}`}>
-              <Card style={{
-                margin: '15px 0',
-                borderLeft: '5px solid #757de8',
-                borderRadius: '5px 0 0 5px',
-              }}>
-                <CardContent style={{ paddingBottom: '16px' }}>
-                  <Typography variant="button">
-                    <strong>Create new game</strong>
-                  </Typography>
-                </CardContent>
-              </Card>
-            </Link>
+            <Button
+              variant="fab"
+              color="primary"
+              component={Link}
+              to={`/games/${this.state.newId}`}
+              style={{ position: 'absolute', bottom: '30px', right: '30px' }}
+            >
+              <AddIcon />
+            </Button>
             <div>
               {this.state.games.length > 0 &&
                 [...this.state.games]

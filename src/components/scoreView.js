@@ -22,32 +22,32 @@ const ScoreView = ({
   homeTurns,
   awayTurns,
 }) => (
-    <Card style={{ marginTop: '1.45rem' }}>
-      <CardContent style={{ textAlign: 'center' }}>
-        <Scoreboard
-          title={title}
-          team1={team1}
-          team2={team2}
-          homeScore={homeScore}
-          awayScore={awayScore}
-          homeOffense={homeOffense}
-          homeHasDisc={homeHasDisc}
-        />
-        <Controls
-          level={level}
-          handleEvent={handleEvent}
-          team1={team1}
-          team2={team2}
-          disableScore={disableScore}
-          disableUndo={disableUndo}
-          disableHalf={disableHalf}
-          homePasses={homePasses}
-          awayPasses={awayPasses}
-          homeTurns={homeTurns}
-          awayTurns={awayTurns}
-        />
-      </CardContent>
-    </Card>
-  )
+  <Card style={{ marginTop: '1.45rem' }}>
+    <CardContent style={{ textAlign: 'center' }}>
+      <Scoreboard
+        title={title}
+        team1={team1}
+        team2={team2}
+        homeScore={homeScore}
+        awayScore={awayScore}
+        homeOffense={homeOffense}
+        homeHasDisc={homeHasDisc}
+      />
+      <Controls
+        level={level}
+        handleEvent={handleEvent}
+        team1={team1}
+        team2={team2}
+        disableScore={disableScore}
+        disableUndo={disableUndo}
+        disableHalf={disableHalf}
+        homePasses={homePasses}
+        awayPasses={awayPasses}
+        homeTurns={homeTurns}
+        awayTurns={awayTurns}
+      />
+    </CardContent>
+  </Card>
+)
 
 export default ScoreView

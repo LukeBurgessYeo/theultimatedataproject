@@ -33,7 +33,7 @@ function withRoot(Component) {
           <CssBaseline />
           <Component {...this.props} />
         </MuiThemeProvider>
-      );
+      )
     }
   }
 

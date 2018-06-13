@@ -99,7 +99,9 @@ class GamePage extends React.Component {
       )
     ) {
       let updated = JSON.parse(localStorage.getItem('games'))
-      const game = updated.filter(g => g.id === window.location.pathname.split('/')[2])[0]
+      const game = updated.filter(
+        g => g.id === window.location.pathname.split('/')[2]
+      )[0]
       updated.splice(updated.indexOf(game), 1)
       localStorage.setItem('games', JSON.stringify(updated))
       navigateTo('/')
