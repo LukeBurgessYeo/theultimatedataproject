@@ -93,19 +93,13 @@ class GamePage extends React.Component {
   }
 
   deleteGame = () => {
-    if (
-      window.confirm(
-        'Are you sure you want to delete this game? This cannot be undone.'
-      )
-    ) {
-      let updated = JSON.parse(localStorage.getItem('games'))
-      const game = updated.filter(
-        g => g.id === window.location.pathname.split('/')[2]
-      )[0]
-      updated.splice(updated.indexOf(game), 1)
-      localStorage.setItem('games', JSON.stringify(updated))
-      navigateTo('/')
-    }
+    let updated = JSON.parse(localStorage.getItem('games'))
+    const game = updated.filter(
+      g => g.id === window.location.pathname.split('/')[2]
+    )[0]
+    updated.splice(updated.indexOf(game), 1)
+    localStorage.setItem('games', JSON.stringify(updated))
+    navigateTo('/')
   }
 
   render() {
