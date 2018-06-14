@@ -150,7 +150,7 @@ class GamePage extends React.Component {
       />
     )
 
-    const stats = <StatsView points={points} />
+    const stats = <StatsView points={points} level={level} />
 
     const settingsView = (
       <SettingsView

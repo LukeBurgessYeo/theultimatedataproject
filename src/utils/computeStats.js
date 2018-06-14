@@ -77,6 +77,7 @@ const compute = events => {
       ? [
         ...total.points,
         {
+          homeOPoint: total.homeOffense,
           home: {
             score: newHomeScore,
             turns: total.home.turns,
