@@ -75,21 +75,21 @@ const compute = events => {
       event.trigger
     )
       ? [
-        ...total.points,
-        {
-          homeOPoint: total.homeOffense,
-          home: {
-            score: newHomeScore,
-            turns: total.home.turns,
-            passes: total.home.passes,
+          ...total.points,
+          {
+            homeOPoint: total.homeOffense,
+            home: {
+              score: newHomeScore,
+              turns: total.home.turns,
+              passes: total.home.passes,
+            },
+            away: {
+              score: newAwayScore,
+              turns: total.away.turns,
+              passes: total.away.passes,
+            },
           },
-          away: {
-            score: newAwayScore,
-            turns: total.away.turns,
-            passes: total.away.passes,
-          },
-        },
-      ]
+        ]
       : event.trigger === 'half'
         ? [...total.points, 'half']
         : total.points
