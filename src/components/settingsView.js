@@ -53,14 +53,14 @@ class GameSettings extends React.Component {
             display ? [Styles.show, Styles.hide].join(' ') : Styles.hide
           }
         >
-          <CardContent>
+          <CardContent style={{ maxWidth: '520px', margin: '0 auto' }}>
             <FormControl style={inputStyles}>
               <InputLabel htmlFor="title">Title</InputLabel>
               <Input id="title" value={title} onChange={handleChange} />
             </FormControl>
             <div style={{ marginBottom: inputStyles.marginBottom }}>
               <FormControl style={{ width: '40%' }}>
-                <InputLabel htmlFor="team1">Starting Offense:</InputLabel>
+                <InputLabel htmlFor="team1">Starting Offense</InputLabel>
                 <Input id="team1" value={team1} onChange={handleChange} />
               </FormControl>
               <span
@@ -75,7 +75,7 @@ class GameSettings extends React.Component {
                 </IconButton>
               </span>
               <FormControl style={{ width: '40%' }}>
-                <InputLabel htmlFor="team2">Starting Defense:</InputLabel>
+                <InputLabel htmlFor="team2">Starting Defense</InputLabel>
                 <Input id="team2" value={team2} onChange={handleChange} />
               </FormControl>
             </div>

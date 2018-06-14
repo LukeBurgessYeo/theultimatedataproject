@@ -23,7 +23,9 @@ const ScoreView = ({
   awayTurns,
 }) => (
   <Card style={{ marginTop: '1.45rem' }}>
-    <CardContent style={{ textAlign: 'center' }}>
+    <CardContent
+      style={{ textAlign: 'center', maxWidth: '520px', margin: '0 auto' }}
+    >
       <Scoreboard
         title={title}
         team1={team1}
