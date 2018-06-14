@@ -1,8 +1,5 @@
 import React from 'react'
 
-const NotFoundPage = () => (
-  <div>
-  </div>
-)
+const NotFoundPage = () => <div />
 
 export default NotFoundPage

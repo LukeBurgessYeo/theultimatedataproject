@@ -1,5 +1,8 @@
 import { SheetsRegistry } from 'jss'
-import { createMuiTheme, createGenerateClassName } from '@material-ui/core/styles'
+import {
+  createMuiTheme,
+  createGenerateClassName,
+} from '@material-ui/core/styles'
 
 // A theme with custom primary and secondary color.
 // It's optional.
@@ -14,7 +17,7 @@ function createPageContext() {
     sheetsRegistry: new SheetsRegistry(),
     // The standard class name generator.
     generateClassName: createGenerateClassName(),
-  };
+  }
 }
 
 export default function getPageContext() {
