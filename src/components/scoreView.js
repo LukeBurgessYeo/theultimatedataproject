@@ -35,6 +35,7 @@ const ScoreView = ({
         />
         <Controls
           level={level}
+          homeHasDisc={homeHasDisc}
           handleEvent={handleEvent}
           team1={team1}
           team2={team2}

@@ -1,7 +1,14 @@
+const addOneToLast = arr => {
+  const length = arr.length
+  return length > 0
+    ? [...arr.slice(0, length - 1), arr[length - 1] + 1]
+    : [arr[0] + 1]
+}
+
 const compute = events => {
   const initial = {
-    home: { score: 0, turns: 0, passes: 0 },
-    away: { score: 0, turns: 0, passes: 0 },
+    home: { score: 0, turns: 0, passes: [0] },
+    away: { score: 0, turns: 0, passes: [] },
     points: [],
     homeHasDisc: true,
     homeOffense: true,
@@ -41,35 +48,47 @@ const compute = events => {
 
     const newHomePasses =
       event.trigger === 'score'
-        ? 0
-        : total.homeHasDisc && event.trigger === 'pass'
-          ? total.home.passes + 1
-          : total.home.passes
+        ? !total.homeHasDisc
+          ? [0]
+          : []
+        : total.homeHasDisc && event.trigger === 'turn'
+          ? total.home.passes
+          : !total.homeHasDisc && event.trigger === 'turn'
+            ? [...total.home.passes, 0]
+            : total.homeHasDisc && event.trigger === 'pass'
+              ? addOneToLast(total.home.passes)
+              : total.home.passes
     const newAwayPasses =
       event.trigger === 'score'
-        ? 0
-        : !total.homeHasDisc && event.trigger === 'pass'
-          ? total.away.passes + 1
-          : total.away.passes
+        ? total.homeHasDisc
+          ? [0]
+          : []
+        : !total.homeHasDisc && event.trigger === 'turn'
+          ? total.away.passes
+          : total.homeHasDisc && event.trigger === 'turn'
+            ? [...total.away.passes, 0]
+            : !total.homeHasDisc && event.trigger === 'pass'
+              ? addOneToLast(total.away.passes)
+              : total.away.passes
 
     const newPoints = ['score', 'homeScore', 'awayScore'].includes(
       event.trigger
     )
       ? [
-          ...total.points,
-          {
-            home: {
-              score: newHomeScore,
-              turns: total.home.turns,
-              passes: total.home.passes,
-            },
-            away: {
-              score: newAwayScore,
-              turns: total.away.turns,
-              passes: total.away.passes,
-            },
+        ...total.points,
+        {
+          home: {
+            score: newHomeScore,
+            turns: total.home.turns,
+            passes: total.home.passes,
           },
-        ]
+          away: {
+            score: newAwayScore,
+            turns: total.away.turns,
+            passes: total.away.passes,
+          },
+        },
+      ]
       : event.trigger === 'half'
         ? [...total.points, 'half']
         : total.points

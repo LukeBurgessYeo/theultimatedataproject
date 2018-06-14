@@ -19,6 +19,7 @@ const Button = ({
 const Controls = ({
   level,
   handleEvent,
+  homeHasDisc,
   team1,
   team2,
   disableScore,
@@ -35,7 +36,13 @@ const Controls = ({
           id="pass"
           style={Styles.pass}
           disabled={false}
-          text={homePasses + awayPasses === 0 ? 'Pass' : `${homePasses} - Passes - ${awayPasses}`}
+          text={homeHasDisc
+            ? homePasses.length === 0 || homePasses[0] === 0
+              ? 'Pass'
+              : `Passes: ${homePasses[homePasses.length - 1]}`
+            : awayPasses.length === 0 || awayPasses[0] === 0
+              ? 'Pass'
+              : `Passes: ${awayPasses[awayPasses.length - 1]}`}
           handler={handleEvent}
         />
       )}
