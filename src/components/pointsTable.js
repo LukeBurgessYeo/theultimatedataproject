@@ -17,8 +17,7 @@ const PointsTable = ({ points, level, team1, team2 }) => (
           >
             {team1}
           </TableCell>
-          <TableCell>
-          </TableCell>
+          <TableCell />
           <TableCell
             style={{ textAlign: 'center' }}
             colSpan={level}
@@ -30,16 +29,24 @@ const PointsTable = ({ points, level, team1, team2 }) => (
         </TableRow>
         <TableRow>
           {level > 2 && (
-            <TableCell padding="none" style={{ textAlign: 'center', minWidth: '50px' }}>
+            <TableCell
+              padding="none"
+              style={{ textAlign: 'center', minWidth: '50px' }}
+            >
               Passes
             </TableCell>
           )}
           {level > 1 && (
-            <TableCell padding="none" style={{ textAlign: 'center', minWidth: '50px' }}>
+            <TableCell
+              padding="none"
+              style={{ textAlign: 'center', minWidth: '50px' }}
+            >
               Turns
             </TableCell>
           )}
-          <TableCell padding="none" style={{ textAlign: 'center' }}>O/D</TableCell>
+          <TableCell padding="none" style={{ textAlign: 'center' }}>
+            O/D
+          </TableCell>
           <TableCell padding="none" numeric style={{ textAlign: 'center' }}>
             Score
           </TableCell>
@@ -52,7 +59,12 @@ const PointsTable = ({ points, level, team1, team2 }) => (
             </TableCell>
           )}
           {level > 2 && (
-            <TableCell padding="none" numeric style style={{ textAlign: 'center' }}>
+            <TableCell
+              padding="none"
+              numeric
+              style
+              style={{ textAlign: 'center' }}
+            >
               Passes
             </TableCell>
           )}
@@ -65,7 +77,7 @@ const PointsTable = ({ points, level, team1, team2 }) => (
               point === 'half' ? (
                 <TableRow key={index}>
                   <TableCell
-                    colSpan={1 + (level * 2)}
+                    colSpan={1 + level * 2}
                     padding="none"
                     style={{ textAlign: 'center', minWidth: '50px' }}
                   >
@@ -73,39 +85,45 @@ const PointsTable = ({ points, level, team1, team2 }) => (
                   </TableCell>
                 </TableRow>
               ) : (
-                  <TableRow key={index}>
-                    {level > 2 && (
-                      <TableCell padding="none" style={{ minWidth: '50px', paddingLeft: '6px' }}>
-                        {point.home.passes.join(',') || '-'}
-                      </TableCell>
-                    )}
-                    {level > 1 && (
-                      <TableCell padding="none" style={{ textAlign: 'center' }}>{point.home.turns}</TableCell>
-                    )}
-                    <TableCell padding="none" style={{ textAlign: 'center' }}>
-                      {point.homeOPoint ? 'O' : 'D'}
-                    </TableCell>
+                <TableRow key={index}>
+                  {level > 2 && (
                     <TableCell
                       padding="none"
-                      style={{ textAlign: 'center' }}
+                      style={{ minWidth: '50px', paddingLeft: '6px' }}
                     >
-                      {point.home.score} - {point.away.score}
+                      {point.home.passes.join(',') || '-'}
                     </TableCell>
+                  )}
+                  {level > 1 && (
                     <TableCell padding="none" style={{ textAlign: 'center' }}>
-                      {point.homeOPoint ? 'D' : 'O'}
+                      {point.home.turns}
                     </TableCell>
-                    {level > 1 && (
-                      <TableCell padding="none" style={{ textAlign: 'center' }}>
-                        {point.away.turns}
-                      </TableCell>
-                    )}
-                    {level > 2 && (
-                      <TableCell padding="none" style={{ minWidth: '50px', paddingRight: '6px' }} numeric>
-                        {point.away.passes.join(',') || '-'}
-                      </TableCell>
-                    )}
-                  </TableRow>
-                )
+                  )}
+                  <TableCell padding="none" style={{ textAlign: 'center' }}>
+                    {point.homeOPoint ? 'O' : 'D'}
+                  </TableCell>
+                  <TableCell padding="none" style={{ textAlign: 'center' }}>
+                    {point.home.score} - {point.away.score}
+                  </TableCell>
+                  <TableCell padding="none" style={{ textAlign: 'center' }}>
+                    {point.homeOPoint ? 'D' : 'O'}
+                  </TableCell>
+                  {level > 1 && (
+                    <TableCell padding="none" style={{ textAlign: 'center' }}>
+                      {point.away.turns}
+                    </TableCell>
+                  )}
+                  {level > 2 && (
+                    <TableCell
+                      padding="none"
+                      style={{ minWidth: '50px', paddingRight: '6px' }}
+                      numeric
+                    >
+                      {point.away.passes.join(',') || '-'}
+                    </TableCell>
+                  )}
+                </TableRow>
+              )
           )}
       </TableBody>
     </Table>

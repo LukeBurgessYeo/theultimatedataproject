@@ -18,7 +18,12 @@ const StatsView = ({ points, level, team1, team2, results }) => (
     </Card>
     <Card style={{ marginTop: '4px' }}>
       <CardContent style={{ padding: '4px' }}>
-        <ResultsTable team1={team1} team2={team2} level={level} results={results} />
+        <ResultsTable
+          team1={team1}
+          team2={team2}
+          level={level}
+          results={results}
+        />
       </CardContent>
     </Card>
   </div>

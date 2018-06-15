@@ -13,25 +13,41 @@ const ResultsTable = ({ team1, team2, level, results }) => (
           <TableCell style={{ textAlign: 'center' }} padding="none" colSpan={2}>
             {team1}
           </TableCell>
-          <TableCell padding="none" style={{ width: '35%', textAlign: 'center' }}>
-          </TableCell>
+          <TableCell
+            padding="none"
+            style={{ width: '35%', textAlign: 'center' }}
+          />
           <TableCell style={{ textAlign: 'center' }} padding="none" colSpan={2}>
             {team2}
           </TableCell>
         </TableRow>
         <TableRow>
-          <TableCell style={{ textAlign: 'center', wordWrap: 'normal' }} padding="none">
+          <TableCell
+            style={{ textAlign: 'center', wordWrap: 'normal' }}
+            padding="none"
+          >
             Offense
           </TableCell>
-          <TableCell style={{ textAlign: 'center', wordWrap: 'normal' }} padding="none">
+          <TableCell
+            style={{ textAlign: 'center', wordWrap: 'normal' }}
+            padding="none"
+          >
             Defense
           </TableCell>
-          <TableCell padding="none" style={{ width: '35%', textAlign: 'center' }}>
-          </TableCell>
-          <TableCell style={{ textAlign: 'center', wordWrap: 'normal' }} padding="none">
+          <TableCell
+            padding="none"
+            style={{ width: '35%', textAlign: 'center' }}
+          />
+          <TableCell
+            style={{ textAlign: 'center', wordWrap: 'normal' }}
+            padding="none"
+          >
             Offense
           </TableCell>
-          <TableCell style={{ textAlign: 'center', wordWrap: 'normal' }} padding="none">
+          <TableCell
+            style={{ textAlign: 'center', wordWrap: 'normal' }}
+            padding="none"
+          >
             Defense
           </TableCell>
         </TableRow>
@@ -45,7 +61,10 @@ const ResultsTable = ({ team1, team2, level, results }) => (
             <TableCell style={{ textAlign: 'center' }} padding="none">
               {stat.home.D}
             </TableCell>
-            <TableCell padding="none" style={{ wordWrap: 'normal', width: '35%', textAlign: 'center' }}>
+            <TableCell
+              padding="none"
+              style={{ wordWrap: 'normal', width: '35%', textAlign: 'center' }}
+            >
               {stat.name}
             </TableCell>
             <TableCell style={{ textAlign: 'center' }} padding="none">
@@ -58,7 +77,7 @@ const ResultsTable = ({ team1, team2, level, results }) => (
         ))}
       </TableBody>
     </Table>
-  </div >
+  </div>
 )
 
 export default ResultsTable

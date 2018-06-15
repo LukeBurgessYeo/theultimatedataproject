@@ -159,7 +159,8 @@ class GamePage extends React.Component {
         team1={team1}
         team2={team2}
         results={results}
-      />)
+      />
+    )
 
     const settingsView = (
       <SettingsView
