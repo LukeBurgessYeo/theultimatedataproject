@@ -5,9 +5,9 @@ import TableCell from '@material-ui/core/TableCell'
 import TableHead from '@material-ui/core/TableHead'
 import TableRow from '@material-ui/core/TableRow'
 
-const PointsTable = ({ points, level }) => (
+const PointsTable = ({ points, level, team1, team2 }) => (
   <div>
-    <Table>
+    <Table style={{ tableLayout: 'fixed', maxWidth: '100%' }}>
       <TableHead>
         <TableRow>
           <TableCell
@@ -15,7 +15,7 @@ const PointsTable = ({ points, level }) => (
             colSpan={level + 1}
             padding="none"
           >
-            Team 1
+            {team1}
           </TableCell>
           <TableCell
             style={{ textAlign: 'center' }}
@@ -23,38 +23,41 @@ const PointsTable = ({ points, level }) => (
             padding="none"
             numeric
           >
-            Team 2
+            {team2}
           </TableCell>
         </TableRow>
         <TableRow>
-          {level > 2 && <TableCell padding="none">Passes</TableCell>}
-          {level > 1 && <TableCell padding="none">Turns</TableCell>}
-          <TableCell padding="none">O/D</TableCell>
+          {level > 2 && <TableCell padding="none" style={{ textAlign: 'center' }}>Pass</TableCell>}
+          {level > 1 && <TableCell padding="none" style={{ textAlign: 'center' }}>Turn</TableCell>}
+          <TableCell padding="none" style={{ textAlign: 'center' }}>O/D</TableCell>
           <TableCell
             padding="none"
-            style={{ borderRight: '1px solid #e0e0e0' }}
+            style={{
+              borderRight: '1px solid #e0e0e0',
+              textAlign: 'center'
+            }}
           >
             Score
           </TableCell>
-          <TableCell padding="none" numeric>
+          <TableCell padding="none" numeric style={{ textAlign: 'center' }}>
             Score
           </TableCell>
-          <TableCell padding="none" numeric>
+          <TableCell padding="none" numeric style={{ textAlign: 'center' }}>
             O/D
           </TableCell>
           {level > 1 && (
-            <TableCell padding="none" numeric>
-              Turns
+            <TableCell padding="none" numeric style={{ textAlign: 'center' }}>
+              Turn
             </TableCell>
           )}
           {level > 2 && (
-            <TableCell padding="none" numeric>
-              Passes
+            <TableCell padding="none" numeric style style={{ textAlign: 'center' }}>
+              Pass
             </TableCell>
           )}
         </TableRow>
       </TableHead>
-      <TableBody style={{ width: '100%' }}>
+      <TableBody>
         {points.length > 0 &&
           points.map(
             (point, index) =>
@@ -63,48 +66,48 @@ const PointsTable = ({ points, level }) => (
                   <TableCell
                     colSpan={6}
                     padding="none"
-                    style={{ textAlign: 'center' }}
+                    style={{ textAlign: 'center', minWidth: '50px' }}
                   >
                     Halftime
                   </TableCell>
                 </TableRow>
               ) : (
-                <TableRow key={index}>
-                  {level > 2 && (
-                    <TableCell padding="none">
-                      {point.home.passes.join(',') || '-'}
+                  <TableRow key={index}>
+                    {level > 2 && (
+                      <TableCell padding="none">
+                        {point.home.passes.join(',') || '-'}
+                      </TableCell>
+                    )}
+                    {level > 1 && (
+                      <TableCell padding="none" style={{ textAlign: 'center' }}>{point.home.turns}</TableCell>
+                    )}
+                    <TableCell padding="none" style={{ textAlign: 'center' }}>
+                      {point.homeOPoint ? 'O' : 'D'}
                     </TableCell>
-                  )}
-                  {level > 1 && (
-                    <TableCell padding="none">{point.home.turns}</TableCell>
-                  )}
-                  <TableCell padding="none">
-                    {point.homeOPoint ? 'O' : 'D'}
-                  </TableCell>
-                  <TableCell
-                    padding="none"
-                    style={{ borderRight: '1px solid #e0e0e0' }}
-                  >
-                    {point.home.score}
-                  </TableCell>
-                  <TableCell padding="none" numeric>
-                    {point.away.score}
-                  </TableCell>
-                  <TableCell padding="none" numeric>
-                    {point.homeOPoint ? 'D' : 'O'}
-                  </TableCell>
-                  {level > 1 && (
-                    <TableCell padding="none" numeric>
-                      {point.away.turns}
+                    <TableCell
+                      padding="none"
+                      style={{ borderRight: '1px solid #e0e0e0', textAlign: 'center' }}
+                    >
+                      {point.home.score}
                     </TableCell>
-                  )}
-                  {level > 2 && (
-                    <TableCell padding="none" numeric>
-                      {point.away.passes.join(',') || '-'}
+                    <TableCell padding="none" style={{ textAlign: 'center' }}>
+                      {point.away.score}
                     </TableCell>
-                  )}
-                </TableRow>
-              )
+                    <TableCell padding="none" style={{ textAlign: 'center' }}>
+                      {point.homeOPoint ? 'D' : 'O'}
+                    </TableCell>
+                    {level > 1 && (
+                      <TableCell padding="none" style={{ textAlign: 'center' }}>
+                        {point.away.turns}
+                      </TableCell>
+                    )}
+                    {level > 2 && (
+                      <TableCell padding="none" numeric>
+                        {point.away.passes.join(',') || '-'}
+                      </TableCell>
+                    )}
+                  </TableRow>
+                )
           )}
       </TableBody>
     </Table>
