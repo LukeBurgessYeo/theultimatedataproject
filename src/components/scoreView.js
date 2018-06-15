@@ -22,7 +22,7 @@ const ScoreView = ({
   homeTurns,
   awayTurns,
 }) => (
-    <Card style={{ margin: '1.45rem 2px' }}>
+    <Card style={{ margin: '4px 2px' }}>
       <CardContent
         style={{ textAlign: 'center', maxWidth: '520px', margin: '0 auto' }}
       >

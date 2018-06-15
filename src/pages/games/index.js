@@ -2,6 +2,7 @@ import React from 'react'
 import { navigateTo } from 'gatsby-link'
 import SwipeableViews from 'react-swipeable-views'
 import compute from '../../utils/computeStats'
+import Results from '../../utils/computeResults'
 import GameHeader from '../../components/gameHeader'
 import SettingsView from '../../components/settingsView'
 import ScoreView from '../../components/scoreView'
@@ -116,6 +117,7 @@ class GamePage extends React.Component {
     const { points, home, away, homeHasDisc, homeOffense, firstHalf } = compute(
       events
     )
+    const results = Results(points)
 
     const disableScore =
       level === 3 &&
@@ -156,6 +158,7 @@ class GamePage extends React.Component {
         level={level}
         team1={team1}
         team2={team2}
+        results={results}
       />)
 
     const settingsView = (
@@ -195,8 +198,7 @@ class GamePage extends React.Component {
           style={{
             margin: '0 auto',
             maxWidth: 960,
-            padding: '0px 1.0875rem 1.45rem',
-            paddingTop: 0,
+            padding: '0',
           }}
         >
           {settingsView}

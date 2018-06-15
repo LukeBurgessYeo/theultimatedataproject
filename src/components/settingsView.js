@@ -84,7 +84,7 @@ class GameSettings extends React.Component {
               <Select
                 value={level}
                 onChange={handleChange}
-                disabled={disabled}
+                disabled={false}
                 inputProps={{
                   name: 'level',
                   id: 'level',
