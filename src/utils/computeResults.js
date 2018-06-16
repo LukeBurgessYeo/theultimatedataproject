@@ -81,168 +81,168 @@ const compute = points => {
     },
   }
 
-  return points.reduce((total, point) => {
+  return points.filter(p => p !== 'half').reduce((total, point) => {
     const newPointsPlayed = point.homeOPoint
       ? {
-          home: {
-            O: total.pointsPlayed.home.O + 1,
-            D: total.pointsPlayed.home.D,
-          },
-          away: {
-            O: total.pointsPlayed.away.O,
-            D: total.pointsPlayed.away.D + 1,
-          },
-        }
+        home: {
+          O: total.pointsPlayed.home.O + 1,
+          D: total.pointsPlayed.home.D,
+        },
+        away: {
+          O: total.pointsPlayed.away.O,
+          D: total.pointsPlayed.away.D + 1,
+        },
+      }
       : {
-          home: {
-            O: total.pointsPlayed.home.O,
-            D: total.pointsPlayed.home.D + 1,
-          },
-          away: {
-            O: total.pointsPlayed.away.O + 1,
-            D: total.pointsPlayed.away.D,
-          },
-        }
+        home: {
+          O: total.pointsPlayed.home.O,
+          D: total.pointsPlayed.home.D + 1,
+        },
+        away: {
+          O: total.pointsPlayed.away.O + 1,
+          D: total.pointsPlayed.away.D,
+        },
+      }
 
     const newHadDiscPoints = point.homeOPoint
       ? {
-          home: {
-            O: total.pointsPlayed.home.O + 1,
-            D: total.hadDiscPoints.home.D,
-          },
-          away: {
-            O: total.hadDiscPoints.away.O,
-            D: total.hadDiscPoints.away.D + (point.home.turns > 0 ? 1 : 0),
-          },
-        }
+        home: {
+          O: total.pointsPlayed.home.O + 1,
+          D: total.hadDiscPoints.home.D,
+        },
+        away: {
+          O: total.hadDiscPoints.away.O,
+          D: total.hadDiscPoints.away.D + (point.home.turns > 0 ? 1 : 0),
+        },
+      }
       : {
-          home: {
-            O: total.hadDiscPoints.home.O,
-            D: total.hadDiscPoints.home.D + (point.away.turns > 0 ? 1 : 0),
-          },
-          away: {
-            O: total.pointsPlayed.away.O + 1,
-            D: total.hadDiscPoints.away.D,
-          },
-        }
+        home: {
+          O: total.hadDiscPoints.home.O,
+          D: total.hadDiscPoints.home.D + (point.away.turns > 0 ? 1 : 0),
+        },
+        away: {
+          O: total.pointsPlayed.away.O + 1,
+          D: total.hadDiscPoints.away.D,
+        },
+      }
 
     const newScores = point.homeOPoint
       ? {
-          home: {
-            O: total.scores.home.O + (point.homeScore ? 1 : 0),
-            D: total.scores.home.D,
-          },
-          away: {
-            O: total.scores.away.O,
-            D: total.scores.away.D + (point.homeScore ? 0 : 1),
-          },
-        }
+        home: {
+          O: total.scores.home.O + (point.homeScore ? 1 : 0),
+          D: total.scores.home.D,
+        },
+        away: {
+          O: total.scores.away.O,
+          D: total.scores.away.D + (point.homeScore ? 0 : 1),
+        },
+      }
       : {
-          home: {
-            O: total.scores.home.O,
-            D: total.scores.home.D + (point.homeScore ? 1 : 0),
-          },
-          away: {
-            O: total.scores.away.O + (point.homeScore ? 0 : 1),
-            D: total.scores.away.D,
-          },
-        }
+        home: {
+          O: total.scores.home.O,
+          D: total.scores.home.D + (point.homeScore ? 1 : 0),
+        },
+        away: {
+          O: total.scores.away.O + (point.homeScore ? 0 : 1),
+          D: total.scores.away.D,
+        },
+      }
 
     const newNoTurnScores = point.homeOPoint
       ? {
-          home: {
-            O:
-              total.noTurnScores.home.O +
-              (point.homeScore && point.home.turns === 0 ? 1 : 0),
-            D: total.noTurnScores.home.D,
-          },
-          away: {
-            O: total.noTurnScores.away.O,
-            D:
-              total.noTurnScores.away.D +
-              (!point.homeScore && point.away.turns === 0 ? 1 : 0),
-          },
-        }
+        home: {
+          O:
+            total.noTurnScores.home.O +
+            (point.homeScore && point.home.turns === 0 ? 1 : 0),
+          D: total.noTurnScores.home.D,
+        },
+        away: {
+          O: total.noTurnScores.away.O,
+          D:
+            total.noTurnScores.away.D +
+            (!point.homeScore && point.away.turns === 0 ? 1 : 0),
+        },
+      }
       : {
-          home: {
-            O: total.noTurnScores.home.O,
-            D:
-              total.noTurnScores.home.D +
-              (point.homeScore && point.home.turns === 0 ? 1 : 0),
-          },
-          away: {
-            O:
-              total.noTurnScores.away.O +
-              (!point.homeScore && point.away.turns === 0 ? 1 : 0),
-            D: total.noTurnScores.away.D,
-          },
-        }
+        home: {
+          O: total.noTurnScores.home.O,
+          D:
+            total.noTurnScores.home.D +
+            (point.homeScore && point.home.turns === 0 ? 1 : 0),
+        },
+        away: {
+          O:
+            total.noTurnScores.away.O +
+            (!point.homeScore && point.away.turns === 0 ? 1 : 0),
+          D: total.noTurnScores.away.D,
+        },
+      }
 
     const newTurns = point.homeOPoint
       ? {
-          home: {
-            O: total.turns.home.O + point.home.turns,
-            D: total.turns.home.D,
-          },
-          away: {
-            O: total.turns.away.O,
-            D: total.turns.away.D + point.away.turns,
-          },
-        }
+        home: {
+          O: total.turns.home.O + point.home.turns,
+          D: total.turns.home.D,
+        },
+        away: {
+          O: total.turns.away.O,
+          D: total.turns.away.D + point.away.turns,
+        },
+      }
       : {
-          home: {
-            O: total.turns.home.O,
-            D: total.turns.home.D + point.home.turns,
-          },
-          away: {
-            O: total.turns.away.O + point.away.turns,
-            D: total.turns.away.D,
-          },
-        }
+        home: {
+          O: total.turns.home.O,
+          D: total.turns.home.D + point.home.turns,
+        },
+        away: {
+          O: total.turns.away.O + point.away.turns,
+          D: total.turns.away.D,
+        },
+      }
 
     const newPasses = point.homeOPoint
       ? {
-          home: {
-            O: total.passes.home.O + sum(point.home.passes),
-            D: total.passes.home.D,
-          },
-          away: {
-            O: total.passes.away.O,
-            D: total.passes.away.D + sum(point.away.passes),
-          },
-        }
+        home: {
+          O: total.passes.home.O + sum(point.home.passes),
+          D: total.passes.home.D,
+        },
+        away: {
+          O: total.passes.away.O,
+          D: total.passes.away.D + sum(point.away.passes),
+        },
+      }
       : {
-          home: {
-            O: total.passes.home.O,
-            D: total.passes.home.D + sum(point.home.passes),
-          },
-          away: {
-            O: total.passes.away.O + sum(point.away.passes),
-            D: total.passes.away.D,
-          },
-        }
+        home: {
+          O: total.passes.home.O,
+          D: total.passes.home.D + sum(point.home.passes),
+        },
+        away: {
+          O: total.passes.away.O + sum(point.away.passes),
+          D: total.passes.away.D,
+        },
+      }
 
     const newPossessions = point.homeOPoint
       ? {
-          home: {
-            O: total.passes.home.O + point.home.passes.length,
-            D: total.passes.home.D,
-          },
-          away: {
-            O: total.passes.away.O,
-            D: total.passes.away.D + point.home.passes.length,
-          },
-        }
+        home: {
+          O: total.passes.home.O + point.home.passes.length,
+          D: total.passes.home.D,
+        },
+        away: {
+          O: total.passes.away.O,
+          D: total.passes.away.D + point.home.passes.length,
+        },
+      }
       : {
-          home: {
-            O: total.passes.home.O,
-            D: total.passes.home.D + point.home.passes.length,
-          },
-          away: {
-            O: total.passes.away.O + point.home.passes.length,
-            D: total.passes.away.D,
-          },
-        }
+        home: {
+          O: total.passes.home.O,
+          D: total.passes.home.D + point.home.passes.length,
+        },
+        away: {
+          O: total.passes.away.O + point.home.passes.length,
+          D: total.passes.away.D,
+        },
+      }
 
     return {
       pointsPlayed: {
@@ -400,18 +400,18 @@ const Results = points => {
       home: {
         O: `${stats.scores.home.O - stats.noTurnScores.home.O}/${
           stats.hadDiscPoints.home.O
-        }`,
+          }`,
         D: `${stats.scores.home.D - stats.noTurnScores.home.D}/${
           stats.hadDiscPoints.home.D
-        }`,
+          }`,
       },
       away: {
         O: `${stats.scores.away.O - stats.noTurnScores.away.O}/${
           stats.hadDiscPoints.away.O
-        }`,
+          }`,
         D: `${stats.scores.away.D - stats.noTurnScores.away.D}/${
           stats.hadDiscPoints.away.D
-        }`,
+          }`,
       },
     },
     {
