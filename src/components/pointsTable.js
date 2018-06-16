@@ -47,24 +47,19 @@ const PointsTable = ({ points, level, team1, team2 }) => (
           <TableCell padding="none" style={{ textAlign: 'center' }}>
             O/D
           </TableCell>
-          <TableCell padding="none" numeric style={{ textAlign: 'center' }}>
+          <TableCell padding="none" style={{ textAlign: 'center' }}>
             Score
           </TableCell>
-          <TableCell padding="none" numeric style={{ textAlign: 'center' }}>
+          <TableCell padding="none" style={{ textAlign: 'center' }}>
             O/D
           </TableCell>
           {level > 1 && (
-            <TableCell padding="none" numeric style={{ textAlign: 'center' }}>
+            <TableCell padding="none" style={{ textAlign: 'center' }}>
               Turns
             </TableCell>
           )}
           {level > 2 && (
-            <TableCell
-              padding="none"
-              numeric
-              style
-              style={{ textAlign: 'center' }}
-            >
+            <TableCell padding="none" style style={{ textAlign: 'center' }}>
               Passes
             </TableCell>
           )}
