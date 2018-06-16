@@ -53,8 +53,8 @@ const ResultsTable = ({ team1, team2, level, results }) => (
         </TableRow>
       </TableHead>
       <TableBody>
-        {results.filter(r => r.level <= level).map(stat => (
-          <TableRow>
+        {results.filter(r => r.level <= level).map((stat, index) => (
+          <TableRow key={index}>
             <TableCell style={{ textAlign: 'center' }} padding="none">
               {stat.home.O}
             </TableCell>

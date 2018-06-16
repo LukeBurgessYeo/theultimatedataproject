@@ -78,6 +78,12 @@ const compute = events => {
           ...total.points,
           {
             homeOPoint: total.homeOffense,
+            homeScore:
+              event.trigger === 'awayScore'
+                ? false
+                : event.trigger === 'homeScore'
+                  ? true
+                  : total.homeHasDisc,
             home: {
               score: newHomeScore,
               turns: total.home.turns,
@@ -113,7 +119,9 @@ const compute = events => {
           : event.trigger === 'awayScore'
             ? true
             : event.trigger === 'score'
-              ? !total.homeOffense
+              ? total.homeHasDisc
+                ? false
+                : true
               : total.homeOffense
 
     const newTotal = {
