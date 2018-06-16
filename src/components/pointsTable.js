@@ -89,7 +89,7 @@ const PointsTable = ({ points, level, team1, team2 }) => (
                   {level > 2 && (
                     <TableCell
                       padding="none"
-                      style={{ minWidth: '50px', paddingLeft: '6px' }}
+                      style={{ minWidth: '50px', textAlign: 'center' }}
                     >
                       {point.home.passes.join(',') || '-'}
                     </TableCell>
@@ -116,7 +116,7 @@ const PointsTable = ({ points, level, team1, team2 }) => (
                   {level > 2 && (
                     <TableCell
                       padding="none"
-                      style={{ minWidth: '50px', paddingRight: '6px' }}
+                      style={{ minWidth: '50px', textAlign: 'center' }}
                       numeric
                     >
                       {point.away.passes.join(',') || '-'}
