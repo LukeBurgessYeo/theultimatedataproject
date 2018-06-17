@@ -56,6 +56,12 @@ class GamePage extends React.Component {
         localStorage.setItem('games', JSON.stringify(updated))
       }
     }
+    if (this.state.value === 0) {
+      window.scrollTo(0, 0)
+      document.documentElement.style.overflow = 'hidden'
+    } else {
+      document.documentElement.style.overflow = 'auto'
+    }
   }
 
   handleTabChange = (event, value) => {
