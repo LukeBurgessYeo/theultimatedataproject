@@ -1,8 +1,6 @@
 const addOneToLast = arr => {
   const length = arr.length
-  return length > 0
-    ? [...arr.slice(0, length - 1), arr[length - 1] + 1]
-    : [arr[0] + 1]
+  return length > 0 ? [...arr.slice(0, length - 1), arr[length - 1] + 1] : [1]
 }
 
 const compute = events => {

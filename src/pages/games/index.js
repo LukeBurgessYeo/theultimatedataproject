@@ -27,7 +27,6 @@ class GamePage extends React.Component {
     const gameId = window.location.pathname.split('/')[2]
     const gameList = JSON.parse(localStorage.getItem('games'))
     if (!gameList) {
-      console.log('Games list not found, creating and adding current game.')
       localStorage.setItem(
         'games',
         JSON.stringify([{ id: gameId, data: this.state }])
@@ -35,10 +34,9 @@ class GamePage extends React.Component {
     } else {
       const game = gameList.filter(g => g.id === gameId)[0]
       if (game) {
-        console.log(`Loaded game: ${JSON.parse(game.data).title}.`)
         this.setState(JSON.parse(game.data))
       } else {
-        console.log('Game not found in current list, adding new game.')
+        this.setState({ showSettings: true })
         gameList.push({ id: gameId, data: JSON.stringify(this.state) })
         localStorage.setItem('games', JSON.stringify(gameList))
       }

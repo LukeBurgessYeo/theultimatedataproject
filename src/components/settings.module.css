@@ -1,6 +1,4 @@
 .hide {
-  display: block;
-  visibility: visible;
   height: 0;
   transition: height 0.4s;
   -webkit-transition: height 0.4s;
@@ -8,7 +6,6 @@
 }
 
 .show {
-  visibility: visible;
   height: 276px;
   transition: height 0.4s;
   -webkit-transition: height 0.4s;
