@@ -20,40 +20,48 @@ const styles = {
 }
 
 const buttonStyle = {
-  width: '20%',
+  width: '15%',
   color: '#FFFFFF',
   borderRadius: '0',
 }
 
-const GameHeader = ({ classes, toggleSettings, value, handleTabChange }) => (
-  <div>
-    <AppBar position="static">
-      <div
-        style={{
-          display: 'flex',
-          flexDirection: 'row',
-          justifyContent: 'space-between',
-        }}
+const settingsStyle = {
+  width: '15%',
+  color: 'rgba(255, 255, 255, 0.6)',
+  borderRadius: '0',
+}
+
+const GameHeader = ({ classes, toggleSettings, value, handleTabChange, showSettings }) => (
+  <AppBar position="static">
+    <div
+      style={{
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+      }}
+    >
+      <IconButton component={Link} to={'/'} style={buttonStyle}>
+        <Home />
+      </IconButton>
+      <Tabs
+        value={value}
+        fullWidth={true}
+        classes={{ indicator: classes.indicator }}
+        onChange={handleTabChange}
+        style={{ width: '100%' }}
       >
-        <IconButton component={Link} to={'/'} style={buttonStyle}>
-          <Home />
-        </IconButton>
-        <Tabs
-          value={value}
-          fullWidth={true}
-          classes={{ indicator: classes.indicator }}
-          onChange={handleTabChange}
-          style={{ width: '100%' }}
-        >
-          <Tab label="Score" />
-          <Tab label="Stats" />
-        </Tabs>
-        <IconButton onClick={toggleSettings} style={buttonStyle}>
-          <Settings />
-        </IconButton>
-      </div>
-    </AppBar>
-  </div>
+        <Tab label="Score" />
+        <Tab label="Points" />
+        <Tab label="Stats" />
+      </Tabs>
+      <IconButton
+        onClick={toggleSettings}
+        style={showSettings ? buttonStyle : settingsStyle}
+      >
+        <Settings />
+      </IconButton>
+    </div>
+  </AppBar>
 )
 
 export default withRoot(withStyles(styles)(GameHeader))

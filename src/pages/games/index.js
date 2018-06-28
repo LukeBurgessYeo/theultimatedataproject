@@ -7,6 +7,7 @@ import GameHeader from '../../components/gameHeader'
 import SettingsView from '../../components/settingsView'
 import ScoreView from '../../components/scoreView'
 import StatsView from '../../components/statsView'
+import ResultsView from '../../components/resultsView'
 import withRoot from '../../utils/withRoot'
 
 class GamePage extends React.Component {
@@ -166,6 +167,15 @@ class GamePage extends React.Component {
       />
     )
 
+    const result = (
+      <ResultsView
+        level={level}
+        team1={team1}
+        team2={team2}
+        results={results}
+      />
+    )
+
     const settingsView = (
       <SettingsView
         display={showSettings}
@@ -182,17 +192,10 @@ class GamePage extends React.Component {
 
     const header = (
       <GameHeader
-        disabled={events.length > 0}
         toggleSettings={this.toggleSettings}
-        title={title}
-        handleChange={this.handleChange}
-        team1={team1}
-        team2={team2}
-        switchSides={this.switchSides}
-        level={level}
-        deleteGame={this.deleteGame}
         value={value}
         handleTabChange={this.handleTabChange}
+        showSettings={showSettings}
       />
     )
 
@@ -214,6 +217,7 @@ class GamePage extends React.Component {
             >
               {scoreView}
               {stats}
+              {result}
             </SwipeableViews>
           </div>
         </div>
