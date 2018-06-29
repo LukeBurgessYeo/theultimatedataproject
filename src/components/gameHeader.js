@@ -31,7 +31,13 @@ const settingsStyle = {
   borderRadius: '0',
 }
 
-const GameHeader = ({ classes, toggleSettings, value, handleTabChange, showSettings }) => (
+const GameHeader = ({
+  classes,
+  toggleSettings,
+  value,
+  handleTabChange,
+  showSettings,
+}) => (
   <AppBar position="static">
     <div
       style={{

@@ -69,10 +69,20 @@ class HomePage extends React.Component {
               <AddIcon />
             </Button>
             <div>
-              {this.state.games.length > 0 &&
+              {this.state.games.length > 0 ? (
                 [...this.state.games]
                   .reverse()
-                  .map(game => <GameCard key={game.id} game={game} />)}
+                  .map(game => <GameCard key={game.id} game={game} />)
+              ) : (
+                <div>
+                  <Typography variant="display1">
+                    Welcome to Stats Tracker
+                  </Typography>
+                  <Typography variant="title">
+                    Click the + to add a new game
+                  </Typography>
+                </div>
+              )}
             </div>
           </div>
         </div>

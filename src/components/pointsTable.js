@@ -5,6 +5,45 @@ import TableCell from '@material-ui/core/TableCell'
 import TableHead from '@material-ui/core/TableHead'
 import TableRow from '@material-ui/core/TableRow'
 
+const scoreHold = {
+  color: '#3f51b5',
+  textAlign: 'center',
+  fontWeight: 'bold',
+}
+
+const concedeHold = {
+  color: '#f5bc00',
+  textAlign: 'center',
+}
+
+const scoreBreak = {
+  color: '#2bca35',
+  textAlign: 'center',
+  fontWeight: 'bold',
+}
+
+const concedeBreak = {
+  color: '#f50057',
+  textAlign: 'center',
+}
+
+const getStyle = (home, homeO, homeScore) =>
+  homeO
+    ? homeScore
+      ? home
+        ? scoreHold
+        : concedeHold
+      : home
+        ? concedeBreak
+        : scoreBreak
+    : homeScore
+      ? home
+        ? scoreBreak
+        : concedeBreak
+      : home
+        ? concedeHold
+        : scoreHold
+
 const PointsTable = ({ points, level, team1, team2 }) => (
   <div>
     <Table style={{ tableLayout: 'fixed', maxWidth: '100%' }}>
@@ -84,34 +123,58 @@ const PointsTable = ({ points, level, team1, team2 }) => (
                   {level > 2 && (
                     <TableCell
                       padding="none"
-                      style={{ minWidth: '50px', textAlign: 'center' }}
+                      style={{
+                        ...getStyle(true, point.homeOPoint, point.homeScore),
+                        minWidth: '50px',
+                      }}
                     >
                       {point.home.passes.join(',') || '-'}
                     </TableCell>
                   )}
                   {level > 1 && (
-                    <TableCell padding="none" style={{ textAlign: 'center' }}>
+                    <TableCell
+                      padding="none"
+                      style={getStyle(true, point.homeOPoint, point.homeScore)}
+                    >
                       {point.home.turns}
                     </TableCell>
                   )}
-                  <TableCell padding="none" style={{ textAlign: 'center' }}>
+                  <TableCell
+                    padding="none"
+                    style={getStyle(true, point.homeOPoint, point.homeScore)}
+                  >
                     {point.homeOPoint ? 'O' : 'D'}
                   </TableCell>
                   <TableCell padding="none" style={{ textAlign: 'center' }}>
-                    {point.home.score} - {point.away.score}
+                    <span style={point.homeScore ? { fontWeight: 'bold' } : {}}>
+                      {point.home.score}
+                    </span>
+                    {' - '}
+                    <span style={point.homeScore ? {} : { fontWeight: 'bold' }}>
+                      {point.away.score}
+                    </span>
                   </TableCell>
-                  <TableCell padding="none" style={{ textAlign: 'center' }}>
+                  <TableCell
+                    padding="none"
+                    style={getStyle(false, point.homeOPoint, point.homeScore)}
+                  >
                     {point.homeOPoint ? 'D' : 'O'}
                   </TableCell>
                   {level > 1 && (
-                    <TableCell padding="none" style={{ textAlign: 'center' }}>
+                    <TableCell
+                      padding="none"
+                      style={getStyle(false, point.homeOPoint, point.homeScore)}
+                    >
                       {point.away.turns}
                     </TableCell>
                   )}
                   {level > 2 && (
                     <TableCell
                       padding="none"
-                      style={{ minWidth: '50px', textAlign: 'center' }}
+                      style={{
+                        ...getStyle(false, point.homeOPoint, point.homeScore),
+                        minWidth: '50px',
+                      }}
                       numeric
                     >
                       {point.away.passes.join(',') || '-'}
