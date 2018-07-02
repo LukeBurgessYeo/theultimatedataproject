@@ -1,13 +1,13 @@
 import React from 'react'
 import { navigateTo } from 'gatsby-link'
 import SwipeableViews from 'react-swipeable-views'
-import compute from '../../utils/computeStats'
-import Results from '../../utils/computeResults'
+import computePoints from '../../utils/computePoints'
+import computeStats from '../../utils/computeStats'
 import GameHeader from '../../components/gameHeader'
 import SettingsView from '../../components/settingsView'
 import ScoreView from '../../components/scoreView'
+import PointsView from '../../components/pointsView'
 import StatsView from '../../components/statsView'
-import ResultsView from '../../components/resultsView'
 import withRoot from '../../utils/withRoot'
 
 class GamePage extends React.Component {
@@ -119,10 +119,15 @@ class GamePage extends React.Component {
       showSettings,
     } = this.state
     const { transition } = this.props
-    const { points, home, away, homeHasDisc, homeOffense, firstHalf } = compute(
-      events
-    )
-    const results = Results(points)
+    const {
+      points,
+      home,
+      away,
+      homeHasDisc,
+      homeOffense,
+      firstHalf,
+    } = computePoints(events)
+    const computedStats = computeStats(points)
 
     const disableScore =
       level === 3 &&
@@ -157,22 +162,22 @@ class GamePage extends React.Component {
       />
     )
 
-    const stats = (
-      <StatsView
+    const pointsView = (
+      <PointsView
         points={points}
         level={level}
         team1={team1}
         team2={team2}
-        results={results}
+        results={computedStats}
       />
     )
 
-    const result = (
-      <ResultsView
+    const statsView = (
+      <StatsView
         level={level}
         team1={team1}
         team2={team2}
-        results={results}
+        results={computedStats}
       />
     )
 
@@ -216,8 +221,8 @@ class GamePage extends React.Component {
               onChangeIndex={this.handleChangeIndex}
             >
               {scoreView}
-              {stats}
-              {result}
+              {pointsView}
+              {statsView}
             </SwipeableViews>
           </div>
         </div>
