@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 /* globals window CustomEvent */
 import React, { createElement } from "react"
+import netlifyIdentity from "netlify-identity-widget"
 import { Transition } from "react-transition-group"
 import createHistory from "history/createBrowserHistory"
 
@@ -85,4 +86,9 @@ exports.replaceComponentRenderer = ({ props, loader }) => {
     return undefined
   }
   return createElement(ReplaceComponentRenderer, { ...props, loader })
+}
+
+exports.onClientEntry = () => {
+  window.netlifyIdentity = netlifyIdentity
+  netlifyIdentity.init()
 }

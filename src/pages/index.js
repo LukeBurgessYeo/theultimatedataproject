@@ -1,6 +1,7 @@
 import React from 'react'
 import uuidv1 from 'uuid/v1'
 import Link from 'gatsby-link'
+import netlifyIdentity from 'netlify-identity-widget'
 import Typography from '@material-ui/core/Typography'
 import AddIcon from '@material-ui/icons/Add'
 import Button from '@material-ui/core/Button'
@@ -16,6 +17,10 @@ class HomePage extends React.Component {
       games: [],
       newId: uuidv1().split('-')[0],
     }
+  }
+  
+  handleLogin = () => {
+    netlifyIdentity.open()
   }
 
   componentDidMount = () => {
@@ -45,11 +50,13 @@ class HomePage extends React.Component {
           }}
         >
           <Toolbar>
-            <Typography variant="title" color="inherit">
+            <Typography variant="title" color="inherit" style={{flex: '1'}}>
               Stats Tracker
             </Typography>
+            <Button onClick={this.handleLogin} style={{color: '#FFFFFF'}}>Login</Button>
           </Toolbar>
         </AppBar>
+        <div data-netlify-identity-menu></div>
         <div
           style={{
             margin: '0 auto',
