@@ -225,22 +225,22 @@ const compute = points => {
     const newPossessions = point.homeOPoint
       ? {
           home: {
-            O: total.passes.home.O + point.home.passes.length,
-            D: total.passes.home.D,
+            O: total.possessions.home.O + point.home.passes.length,
+            D: total.possessions.home.D,
           },
           away: {
-            O: total.passes.away.O,
-            D: total.passes.away.D + point.home.passes.length,
+            O: total.possessions.away.O,
+            D: total.possessions.away.D + point.away.passes.length,
           },
         }
       : {
           home: {
-            O: total.passes.home.O,
-            D: total.passes.home.D + point.home.passes.length,
+            O: total.possessions.home.O,
+            D: total.possessions.home.D + point.home.passes.length,
           },
           away: {
-            O: total.passes.away.O + point.home.passes.length,
-            D: total.passes.away.D,
+            O: total.possessions.away.O + point.away.passes.length,
+            D: total.possessions.away.D,
           },
         }
 

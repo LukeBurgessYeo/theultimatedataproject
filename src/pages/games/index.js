@@ -15,9 +15,9 @@ class GamePage extends React.Component {
     super(props)
     this.state = {
       events: [],
-      title: 'Game Title',
-      team1: 'Team 1',
-      team2: 'Team 2',
+      title: '',
+      team1: '',
+      team2: '',
       level: 3,
       showSettings: false,
       value: 0,

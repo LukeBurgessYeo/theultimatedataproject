@@ -32,10 +32,10 @@ const Controls = ({
         disabled={false}
         text={
           homeHasDisc
-            ? homePasses.length === 0 || homePasses[0] === 0
+            ? homePasses.length === 0 || homePasses[homePasses.length - 1] === 0
               ? 'Pass'
               : `Passes: ${homePasses[homePasses.length - 1]}`
-            : awayPasses.length === 0 || awayPasses[0] === 0
+            : awayPasses.length === 0 || awayPasses[awayPasses.length - 1] === 0
               ? 'Pass'
               : `Passes: ${awayPasses[awayPasses.length - 1]}`
         }

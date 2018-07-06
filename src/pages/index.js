@@ -18,7 +18,7 @@ class HomePage extends React.Component {
       newId: uuidv1().split('-')[0],
     }
   }
-  
+
   handleLogin = () => {
     netlifyIdentity.open()
   }
@@ -50,13 +50,15 @@ class HomePage extends React.Component {
           }}
         >
           <Toolbar>
-            <Typography variant="title" color="inherit" style={{flex: '1'}}>
+            <Typography variant="title" color="inherit" style={{ flex: '1' }}>
               Stats Tracker
             </Typography>
-            <Button onClick={this.handleLogin} style={{color: '#FFFFFF'}}>Login</Button>
+            <Button onClick={this.handleLogin} style={{ color: '#FFFFFF' }}>
+              Login
+            </Button>
           </Toolbar>
         </AppBar>
-        <div data-netlify-identity-menu></div>
+        <div data-netlify-identity-menu />
         <div
           style={{
             margin: '0 auto',
