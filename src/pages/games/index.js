@@ -8,7 +8,18 @@ import SettingsView from '../../components/settingsView'
 import ScoreView from '../../components/scoreView'
 import PointsView from '../../components/pointsView'
 import StatsView from '../../components/statsView'
+import Tabs from '@material-ui/core/Tabs'
+import Tab from '@material-ui/core/Tab'
+import Card from '@material-ui/core/Card'
+import CardContent from '@material-ui/core/CardContent'
+import { withStyles } from '@material-ui/core/styles'
 import withRoot from '../../utils/withRoot'
+
+const styles = {
+  indicator: {
+    backgroundColor: '#000000',
+  }
+}
 
 class GamePage extends React.Component {
   constructor(props) {
@@ -55,7 +66,7 @@ class GamePage extends React.Component {
         localStorage.setItem('games', JSON.stringify(updated))
       }
     }
-    if (this.state.value === 0) {
+    if (this.state.value === 0 && this.props.size === 0) {
       window.scrollTo(0, 0)
       document.documentElement.style.overflow = 'hidden'
     } else {
@@ -70,6 +81,9 @@ class GamePage extends React.Component {
   handleChangeIndex = index => {
     this.setState({ value: index })
   }
+  
+  transformIndex = index =>
+    index === 2 ? 1 : index
 
   handleChange = e => {
     e.target.type === 'text'
@@ -118,7 +132,7 @@ class GamePage extends React.Component {
       value,
       showSettings,
     } = this.state
-    const { transition } = this.props
+    const { transition, size, classes } = this.props
     const {
       points,
       home,
@@ -201,34 +215,96 @@ class GamePage extends React.Component {
         value={value}
         handleTabChange={this.handleTabChange}
         showSettings={showSettings}
+        mobile={size === 0}
       />
     )
-
-    return (
-      <div>
-        {header}
-        <div
-          style={{
-            margin: '0 auto',
-            maxWidth: 960,
-            padding: '0',
-          }}
-        >
-          {settingsView}
-          <div style={transition && transition.style}>
-            <SwipeableViews
-              index={value}
-              onChangeIndex={this.handleChangeIndex}
-            >
-              {scoreView}
-              {pointsView}
-              {statsView}
-            </SwipeableViews>
+    if (size === 0) {
+      return (
+        <div>
+          {header}
+          <div
+            style={{
+              margin: '0 auto',
+              maxWidth: 960,
+              padding: '0',
+            }}
+          >
+            {settingsView}
+            <div style={transition && transition.style}>
+              <SwipeableViews
+                index={value}
+                onChangeIndex={this.handleChangeIndex}
+              >
+                {scoreView}
+                {pointsView}
+                {statsView}
+              </SwipeableViews>
+            </div>
           </div>
         </div>
-      </div>
-    )
+      )
+    } else {
+      return (
+        <div>
+          {header}
+          {settingsView}
+          {size === 2 
+           ? <div
+            style={{
+              margin: '0 auto',
+              padding: '0 2px',
+              display: 'flex',
+              flexDirection: 'row',
+              justifyContent: 'space-around',
+            }}
+          >
+            <div style={{minWidth: '33.33333%'}}>{scoreView}</div>
+            <div style={{width: '33.33333%'}}>{pointsView}</div>
+            <div style={{width: '33.33333%'}}>{statsView}</div>
+          </div>
+          : <div
+              style={{
+                margin: '0 auto',
+                padding: '0 2px',
+                display: 'flex',
+                flexDirection: 'row',
+                justifyContent: 'space-around',
+              }}
+            >
+              <div style={{minWidth: '40%'}}>{scoreView}</div>
+              <div style={{width: '60%'}}>
+                <Card style={{ margin: '4px 2px 2px 2px', paddingBottom: '0px' }}>
+                  <CardContent
+                    style={{ textAlign: 'center', width: '100%', margin: '0', padding: '0px' }}
+                  >
+                    <Tabs
+                      value={value}
+                      fullWidth={true}
+                      centered={true}
+                      onChange={this.handleTabChange}
+                      classes={{ indicator: classes.indicator }}
+                      style={{ width: '100%', background: '#FFFFFF', color: '#000000' }}
+                    >
+                      <Tab label="Points" />
+                      <Tab label="Stats" />
+                    </Tabs>
+                  </CardContent>
+                </Card>
+                <div style={transition && transition.style}>
+                  <SwipeableViews
+                    index={this.transformIndex(value)}
+                    onChangeIndex={this.handleChangeIndex}
+                  >
+                    {pointsView}
+                    {statsView}
+                  </SwipeableViews>
+                </div>
+              </div>
+            </div>}
+        </div>
+      )
+    }
   }
 }
 
-export default withRoot(GamePage)
+export default withRoot(withStyles(styles)(GamePage))

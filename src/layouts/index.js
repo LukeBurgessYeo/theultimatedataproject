@@ -4,22 +4,48 @@ import Helmet from 'react-helmet'
 
 import './index.css'
 
-const Layout = ({ children, data }) => (
-  <div style={{ backgroundColor: '#EAEAEA' }}>
-    <Helmet
-      title={data.site.siteMetadata.title}
-      meta={[
-        {
-          name: 'description',
-          content:
-            'A simple app for keeping track of stats during a game of ultiamte.',
-        },
-        { name: 'keywords', content: 'ultimate, stats' },
-      ]}
-    />
-    {children()}
-  </div>
-)
+class Layout extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      size: 0,
+    }
+  }
+
+  componentDidMount = () => {
+    this.checkMobile()
+    window.addEventListener('resize', this.checkMobile)
+  }
+
+  componentWillUnmount = () => {
+    window.removeEventListener('resize', this.checkMobile)
+  }
+
+  checkMobile = () => {
+    const size = window.innerWidth < 700 ? 0 : window.innerWidth < 1100 ? 1 : 2
+    this.setState({ size: size })
+  }
+
+  render() {
+    const { children, data } = this.props
+    return (
+      <div style={{ backgroundColor: '#EAEAEA' }}>
+        <Helmet
+          title={data.site.siteMetadata.title}
+          meta={[
+            {
+              name: 'description',
+              content:
+                'A simple app for keeping track of stats during a game of ultiamte.',
+            },
+            { name: 'keywords', content: 'ultimate, stats' },
+          ]}
+        />
+        {children({ ...this.props, size: this.state.size })}
+      </div>
+    )
+  }
+}
 
 Layout.propTypes = {
   children: PropTypes.func,

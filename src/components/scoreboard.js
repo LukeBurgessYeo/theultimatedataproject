@@ -31,7 +31,7 @@ const Scoreboard = ({
       >
         {team1}
       </Typography>
-      <Typography variant="title">
+      <Typography variant="title" style={{ whiteSpace: 'nowrap' }}>
         {homeScore} - {awayScore}
       </Typography>
       <Typography

@@ -6,6 +6,7 @@ import Settings from '@material-ui/icons/Settings'
 import IconButton from '@material-ui/core/IconButton'
 import Tabs from '@material-ui/core/Tabs'
 import Tab from '@material-ui/core/Tab'
+import Typography from '@material-ui/core/Typography'
 import { withStyles } from '@material-ui/core/styles'
 import withRoot from '../utils/withRoot'
 
@@ -37,6 +38,7 @@ const GameHeader = ({
   value,
   handleTabChange,
   showSettings,
+  mobile,
 }) => (
   <AppBar position="static">
     <div
@@ -49,17 +51,26 @@ const GameHeader = ({
       <IconButton component={Link} to={'/'} style={buttonStyle}>
         <Home />
       </IconButton>
-      <Tabs
-        value={value}
-        fullWidth={true}
-        classes={{ indicator: classes.indicator }}
-        onChange={handleTabChange}
-        style={{ width: '100%' }}
-      >
-        <Tab label="Score" />
-        <Tab label="Points" />
-        <Tab label="Stats" />
-      </Tabs>
+      {mobile ? (
+        <Tabs
+          value={value}
+          fullWidth={true}
+          centered={true}
+          classes={{ indicator: classes.indicator }}
+          onChange={handleTabChange}
+          style={{ width: '100%' }}
+        >
+          <Tab label="Score" />
+          <Tab label="Points" />
+          <Tab label="Stats" />
+        </Tabs>
+      ) : (
+        <div style={{ width: '100%', textAlign: 'center', padding: '10px 0' }}>
+          <Typography variant="title" color="inherit" style={{ flex: '1' }}>
+            Stats Tracker
+          </Typography>
+        </div>
+      )}
       <IconButton
         onClick={toggleSettings}
         style={showSettings ? buttonStyle : settingsStyle}
