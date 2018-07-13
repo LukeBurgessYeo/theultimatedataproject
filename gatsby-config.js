@@ -1,6 +1,6 @@
 module.exports = {
   siteMetadata: {
-    title: 'Stats Tracker',
+    title: 'The Ultimate Data Project',
   },
   plugins: [
     `gatsby-plugin-react-next`,
@@ -11,8 +11,8 @@ module.exports = {
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: "Basic Ulti Stats",
-        short_name: "Ulti Stats",
+        name: "Ultimate Data Project",
+        short_name: "Ultimate Data",
         start_url: "/",
         background_color: "#3f51b5",
         theme_color: "#FFFFFF",

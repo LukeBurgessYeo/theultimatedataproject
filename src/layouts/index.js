@@ -36,9 +36,9 @@ class Layout extends React.Component {
             {
               name: 'description',
               content:
-                'A simple app for keeping track of stats during a game of ultiamte.',
+                'An application for keeping track of stats during a game of ultiamte.',
             },
-            { name: 'keywords', content: 'ultimate, stats' },
+            { name: 'keywords', content: 'ultimate, stats, data' },
           ]}
         />
         {children({ ...this.props, size: this.state.size })}

@@ -106,17 +106,19 @@ class GameSettings extends React.Component {
           </CardContent>
         </Card>
         <Modal
-          aria-labelledby="simple-modal-title"
-          aria-describedby="simple-modal-description"
+          aria-labelledby="delete-game"
+          aria-describedby="do you want to delete this game?"
           open={this.state.open}
           onClose={this.handleClose}
+          style={{ alignItems: 'center', justifyContent: 'center' }}
         >
           <Card
             style={{
               width: '90%',
+              maxWidth: '500px',
               position: 'absolute',
               top: '200px',
-              margin: '0 5%',
+              margin: 'auto',
             }}
           >
             <CardContent>

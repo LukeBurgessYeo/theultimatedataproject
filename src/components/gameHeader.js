@@ -39,6 +39,7 @@ const GameHeader = ({
   handleTabChange,
   showSettings,
   mobile,
+  title,
 }) => (
   <AppBar position="static">
     <div
@@ -67,7 +68,7 @@ const GameHeader = ({
       ) : (
         <div style={{ width: '100%', textAlign: 'center', padding: '10px 0' }}>
           <Typography variant="title" color="inherit" style={{ flex: '1' }}>
-            Stats Tracker
+            {title}
           </Typography>
         </div>
       )}

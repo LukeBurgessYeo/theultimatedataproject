@@ -18,7 +18,7 @@ import withRoot from '../../utils/withRoot'
 const styles = {
   indicator: {
     backgroundColor: '#000000',
-  }
+  },
 }
 
 class GamePage extends React.Component {
@@ -81,9 +81,8 @@ class GamePage extends React.Component {
   handleChangeIndex = index => {
     this.setState({ value: index })
   }
-  
-  transformIndex = index =>
-    index === 2 ? 1 : index
+
+  transformIndex = index => (index === 2 ? 1 : index)
 
   handleChange = e => {
     e.target.type === 'text'
@@ -132,7 +131,7 @@ class GamePage extends React.Component {
       value,
       showSettings,
     } = this.state
-    const { transition, size, classes } = this.props
+    const { transition, size, classes, data } = this.props
     const {
       points,
       home,
@@ -216,6 +215,7 @@ class GamePage extends React.Component {
         handleTabChange={this.handleTabChange}
         showSettings={showSettings}
         mobile={size === 0}
+        title={data.site.siteMetadata.title}
       />
     )
     if (size === 0) {
@@ -248,21 +248,8 @@ class GamePage extends React.Component {
         <div>
           {header}
           {settingsView}
-          {size === 2 
-           ? <div
-            style={{
-              margin: '0 auto',
-              padding: '0 2px',
-              display: 'flex',
-              flexDirection: 'row',
-              justifyContent: 'space-around',
-            }}
-          >
-            <div style={{minWidth: '33.33333%'}}>{scoreView}</div>
-            <div style={{width: '33.33333%'}}>{pointsView}</div>
-            <div style={{width: '33.33333%'}}>{statsView}</div>
-          </div>
-          : <div
+          {size === 2 ? (
+            <div
               style={{
                 margin: '0 auto',
                 padding: '0 2px',
@@ -271,11 +258,32 @@ class GamePage extends React.Component {
                 justifyContent: 'space-around',
               }}
             >
-              <div style={{minWidth: '40%'}}>{scoreView}</div>
-              <div style={{width: '60%'}}>
-                <Card style={{ margin: '4px 2px 2px 2px', paddingBottom: '0px' }}>
+              <div style={{ minWidth: '33.33333%' }}>{scoreView}</div>
+              <div style={{ width: '33.33333%' }}>{pointsView}</div>
+              <div style={{ width: '33.33333%' }}>{statsView}</div>
+            </div>
+          ) : (
+            <div
+              style={{
+                margin: '0 auto',
+                padding: '0 2px',
+                display: 'flex',
+                flexDirection: 'row',
+                justifyContent: 'space-around',
+              }}
+            >
+              <div style={{ minWidth: '40%' }}>{scoreView}</div>
+              <div style={{ width: '60%' }}>
+                <Card
+                  style={{ margin: '4px 2px 2px 2px', paddingBottom: '0px' }}
+                >
                   <CardContent
-                    style={{ textAlign: 'center', width: '100%', margin: '0', padding: '0px' }}
+                    style={{
+                      textAlign: 'center',
+                      width: '100%',
+                      margin: '0',
+                      padding: '0px',
+                    }}
                   >
                     <Tabs
                       value={value}
@@ -283,7 +291,11 @@ class GamePage extends React.Component {
                       centered={true}
                       onChange={this.handleTabChange}
                       classes={{ indicator: classes.indicator }}
-                      style={{ width: '100%', background: '#FFFFFF', color: '#000000' }}
+                      style={{
+                        width: '100%',
+                        background: '#FFFFFF',
+                        color: '#000000',
+                      }}
                     >
                       <Tab label="Points" />
                       <Tab label="Stats" />
@@ -300,7 +312,8 @@ class GamePage extends React.Component {
                   </SwipeableViews>
                 </div>
               </div>
-            </div>}
+            </div>
+          )}
         </div>
       )
     }
