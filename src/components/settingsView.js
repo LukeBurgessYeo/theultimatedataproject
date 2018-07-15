@@ -110,7 +110,11 @@ class GameSettings extends React.Component {
           aria-describedby="do you want to delete this game?"
           open={this.state.open}
           onClose={this.handleClose}
-          style={{ alignItems: 'center', justifyContent: 'center' }}
+          style={{
+            alignItems: 'center',
+            WebkitAlignItems: 'center',
+            justifyContent: 'center',
+          }}
         >
           <Card
             style={{
