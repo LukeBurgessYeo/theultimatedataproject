@@ -111,6 +111,7 @@ class GameSettings extends React.Component {
           open={this.state.open}
           onClose={this.handleClose}
           style={{
+            display: 'flex',
             alignItems: 'center',
             WebkitAlignItems: 'center',
             justifyContent: 'center',
