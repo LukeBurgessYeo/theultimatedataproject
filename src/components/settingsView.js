@@ -1,4 +1,5 @@
 import React from 'react'
+import { navigateTo } from 'gatsby-link'
 import Card from '@material-ui/core/Card'
 import CardContent from '@material-ui/core/CardContent'
 import Input from '@material-ui/core/Input'
@@ -10,6 +11,7 @@ import SwapHoriz from '@material-ui/icons/SwapHoriz'
 import MenuItem from '@material-ui/core/MenuItem'
 import Select from '@material-ui/core/Select'
 import Modal from '@material-ui/core/Modal'
+import html2canvas from 'html2canvas'
 import Styles from './settings.module.css'
 import { Typography } from '@material-ui/core'
 
@@ -34,6 +36,35 @@ class GameSettings extends React.Component {
     this.setState({ open: false })
   }
 
+  deleteGame = () => {
+    let updated = JSON.parse(localStorage.getItem('games'))
+    const game = updated.filter(
+      g => g.id === window.location.pathname.split('/')[2]
+    )[0]
+    updated.splice(updated.indexOf(game), 1)
+    localStorage.setItem('games', JSON.stringify(updated))
+    navigateTo('/')
+  }
+
+  saveGame = () => {
+    const { title, team1, team2 } = this.props
+    document.getElementById('hiddenData').style.display = 'block'
+    html2canvas(document.getElementById('savedGameData'))
+      .then(canvas => {
+        document.getElementById('capture').appendChild(canvas)
+      })
+      .then(() => {
+        var link = document.createElement('a')
+        link.download = `${title} - ${team1} vs ${team2}.png`
+        link.href = document.getElementsByTagName('canvas')[0].toDataURL()
+        link.click()
+      })
+      .then(() => {
+        document.getElementsByTagName('canvas')[0].remove()
+        document.getElementById('hiddenData').style.display = 'none'
+      })
+  }
+
   render() {
     const {
       display,
@@ -44,7 +75,6 @@ class GameSettings extends React.Component {
       team2,
       switchSides,
       level,
-      deleteGame,
     } = this.props
     return (
       <div>
@@ -103,6 +133,15 @@ class GameSettings extends React.Component {
             >
               Delete Game
             </Button>
+            <Button
+              variant="outlined"
+              color="primary"
+              onClick={this.saveGame}
+              style={{ float: 'right' }}
+              disabled={!disabled}
+            >
+              Save Game
+            </Button>
           </CardContent>
         </Card>
         <Modal
@@ -142,7 +181,7 @@ class GameSettings extends React.Component {
                 <Button
                   variant="outlined"
                   color="secondary"
-                  onClick={deleteGame}
+                  onClick={this.deleteGame}
                 >
                   Delete
                 </Button>

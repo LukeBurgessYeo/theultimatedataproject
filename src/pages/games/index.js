@@ -8,6 +8,7 @@ import SettingsView from '../../components/settingsView'
 import ScoreView from '../../components/scoreView'
 import PointsView from '../../components/pointsView'
 import StatsView from '../../components/statsView'
+import PrintableGame from '../../components/printableGame'
 import Tabs from '@material-ui/core/Tabs'
 import Tab from '@material-ui/core/Tab'
 import Card from '@material-ui/core/Card'
@@ -111,16 +112,6 @@ class GamePage extends React.Component {
     this.setState(() => ({ events: newEventsArray }))
   }
 
-  deleteGame = () => {
-    let updated = JSON.parse(localStorage.getItem('games'))
-    const game = updated.filter(
-      g => g.id === window.location.pathname.split('/')[2]
-    )[0]
-    updated.splice(updated.indexOf(game), 1)
-    localStorage.setItem('games', JSON.stringify(updated))
-    navigateTo('/')
-  }
-
   render() {
     const {
       events,
@@ -204,7 +195,6 @@ class GamePage extends React.Component {
         team2={team2}
         switchSides={this.switchSides}
         level={level}
-        deleteGame={this.deleteGame}
       />
     )
 
@@ -218,6 +208,20 @@ class GamePage extends React.Component {
         title={data.site.siteMetadata.title}
       />
     )
+
+    const printable = (
+      <PrintableGame
+        title={title}
+        team1={team1}
+        team2={team2}
+        homeScore={home.score}
+        awayScore={away.score}
+      >
+        {pointsView}
+        {statsView}
+      </PrintableGame>
+    )
+
     if (size === 0) {
       return (
         <div>
@@ -230,7 +234,7 @@ class GamePage extends React.Component {
             }}
           >
             {settingsView}
-            <div style={transition && transition.style}>
+            <div id={'game'} style={transition && transition.style}>
               <SwipeableViews
                 index={value}
                 onChangeIndex={this.handleChangeIndex}
@@ -241,6 +245,10 @@ class GamePage extends React.Component {
               </SwipeableViews>
             </div>
           </div>
+          <div id={'hiddenData'} style={{ display: 'none' }}>
+            {printable}
+          </div>
+          <div id={'capture'} style={{ display: 'none' }} />
         </div>
       )
     } else {
@@ -250,6 +258,7 @@ class GamePage extends React.Component {
           {settingsView}
           {size === 2 ? (
             <div
+              id={'game'}
               style={{
                 margin: '0 auto',
                 padding: '0 2px',
@@ -264,6 +273,7 @@ class GamePage extends React.Component {
             </div>
           ) : (
             <div
+              id={'game'}
               style={{
                 margin: '0 auto',
                 padding: '0 2px',
@@ -314,6 +324,10 @@ class GamePage extends React.Component {
               </div>
             </div>
           )}
+          <div id={'hiddenData'} style={{ display: 'none' }}>
+            {printable}
+          </div>
+          <div id={'capture'} style={{ display: 'none' }} />
         </div>
       )
     }

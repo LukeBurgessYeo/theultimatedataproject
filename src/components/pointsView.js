@@ -52,7 +52,7 @@ const PointsView = ({ points, level, team1, team2, results }) => (
       <CardContent style={{ padding: '4px' }}>
         <Table style={{ tableLayout: 'fixed', maxWidth: '100%' }}>
           <TableHead>
-            <TableRow>
+            <TableRow data-html2canvas-ignore>
               <TableCell
                 style={{ textAlign: 'center' }}
                 colSpan={level}
