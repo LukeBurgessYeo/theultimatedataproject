@@ -108,7 +108,6 @@ class GamePage extends React.Component {
       newEvent.trigger === 'undo'
         ? this.state.events.slice(0, -1)
         : [...this.state.events, newEvent]
-    console.log(newEventsArray.map(item => item.trigger))
     this.setState(() => ({ events: newEventsArray }))
   }
 

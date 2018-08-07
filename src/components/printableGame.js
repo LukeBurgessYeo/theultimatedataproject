@@ -12,7 +12,7 @@ const PrintableGame = ({
   <div id={'savedGameData'} style={{ maxWidth: '400px' }}>
     <Typography
       variant="subheading"
-      style={{ margin: '30px 0 15px 0', textAlign: 'center' }}
+      style={{ padding: '30px 0 15px 0', textAlign: 'center' }}
     >
       {title}
     </Typography>
@@ -41,6 +41,16 @@ const PrintableGame = ({
       </Typography>
     </div>
     {children}
+    <Typography
+      variant="caption"
+      style={{
+        textAlign: 'right',
+        padding: '0 10px 5px 0',
+        marginTop: '-20px',
+      }}
+    >
+      theultimatedataproject.com
+    </Typography>
   </div>
 )
 
