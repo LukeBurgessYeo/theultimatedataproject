@@ -102,8 +102,9 @@ class GamePage extends React.Component {
     this.setState(p => ({ showSettings: !p.showSettings }))
   }
 
-  handleEvent = e => {
-    const newEvent = { trigger: e.target.id, time: new Date() }
+  handleEvent = trig => {
+    console.log(trig)
+    const newEvent = { trigger: trig, time: new Date() }
     const newEventsArray =
       newEvent.trigger === 'undo'
         ? this.state.events.slice(0, -1)
