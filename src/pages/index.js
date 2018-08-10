@@ -78,6 +78,11 @@ class HomePage extends React.Component {
                   <Typography variant="display1">
                     Welcome to {data.site.siteMetadata.title}
                   </Typography>
+                  <Typography variant="subheading">
+                    A simple application for keeping track of stats during a
+                    game of ultimate.
+                  </Typography>
+                  <br />
                   <Typography variant="title">
                     Click the + to add a new game
                   </Typography>
