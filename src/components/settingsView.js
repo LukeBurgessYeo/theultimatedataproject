@@ -145,8 +145,7 @@ class GameSettings extends React.Component {
           </CardContent>
         </Card>
         <Modal
-          aria-labelledby="delete-game"
-          aria-describedby="do you want to delete this game?"
+          aria-describedby="delete-modal-content"
           open={this.state.open}
           onClose={this.handleClose}
           style={{
@@ -165,7 +164,7 @@ class GameSettings extends React.Component {
               margin: 'auto',
             }}
           >
-            <CardContent>
+            <CardContent id="delete-modal-content">
               <Typography paragraph={true} variant="subheading">
                 Are you sure you want to delete this game? This cannot be
                 undone.

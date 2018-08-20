@@ -3,10 +3,13 @@ import uuidv1 from 'uuid/v1'
 import Link from 'gatsby-link'
 import Typography from '@material-ui/core/Typography'
 import AddIcon from '@material-ui/icons/Add'
+import Info from '@material-ui/icons/Info'
 import Button from '@material-ui/core/Button'
 import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
+import IconButton from '@material-ui/core/IconButton'
 import GameCard from '../components/gamecard'
+import InfoModal from '../components/infoModal'
 import withRoot from '../utils/withRoot'
 
 class HomePage extends React.Component {
@@ -15,6 +18,7 @@ class HomePage extends React.Component {
     this.state = {
       games: [],
       newId: uuidv1().split('-')[0],
+      open: false,
     }
   }
 
@@ -33,6 +37,14 @@ class HomePage extends React.Component {
     }
   }
 
+  handleOpen = () => {
+    this.setState({ open: true })
+  }
+
+  handleClose = () => {
+    this.setState({ open: false })
+  }
+
   render() {
     const { transition, data } = this.props
 
@@ -48,6 +60,9 @@ class HomePage extends React.Component {
             <Typography variant="title" color="inherit" style={{ flex: '1' }}>
               {data.site.siteMetadata.title}
             </Typography>
+            <IconButton onClick={this.handleOpen} style={{ color: '#FFFFFF' }}>
+              <Info />
+            </IconButton>
           </Toolbar>
         </AppBar>
         <div
@@ -89,6 +104,11 @@ class HomePage extends React.Component {
                 </div>
               )}
             </div>
+            <InfoModal
+              open={this.state.open}
+              close={this.handleClose}
+              title={data.site.siteMetadata.title}
+            />
           </div>
         </div>
       </div>
