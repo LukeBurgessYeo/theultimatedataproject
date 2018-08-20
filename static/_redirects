@@ -1,0 +1,2 @@
+# Redirect default Netlify subdomain to primary domain
+https://theultimatedataproject.netlify.com/* https://www.theultimatedataproject.com/:splat 301!
