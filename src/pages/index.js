@@ -1,6 +1,7 @@
 import React from 'react'
 import uuidv1 from 'uuid/v1'
 import Link from 'gatsby-link'
+import PageTransition from 'gatsby-plugin-page-transitions'
 import Typography from '@material-ui/core/Typography'
 import AddIcon from '@material-ui/icons/Add'
 import Info from '@material-ui/icons/Info'
@@ -73,7 +74,7 @@ class HomePage extends React.Component {
             paddingTop: 0,
           }}
         >
-          <div style={transition && transition.style}>
+          <PageTransition>
             <Button
               variant="fab"
               color="primary"
@@ -109,7 +110,7 @@ class HomePage extends React.Component {
               close={this.handleClose}
               title={data.site.siteMetadata.title}
             />
-          </div>
+          </PageTransition>
         </div>
       </div>
     )
