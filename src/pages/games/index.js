@@ -223,121 +223,94 @@ class GamePage extends React.Component {
       </PrintableGame>
     )
 
-    if (size === 0) {
-      return (
-        <div>
-          {header}
-          <div
-            style={{
-              margin: '0 auto',
-              maxWidth: 960,
-              padding: '0',
-            }}
-          >
-            <PageTransition>
-              {settingsView}
-              <div id={'game'} style={transition && transition.style}>
-                <SwipeableViews
-                  index={value}
-                  onChangeIndex={this.handleChangeIndex}
+    const page = size =>
+      size === 0 ? (
+        <SwipeableViews index={value} onChangeIndex={this.handleChangeIndex}>
+          {scoreView}
+          {pointsView}
+          {statsView}
+        </SwipeableViews>
+      ) : size === 2 ? (
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: 'row',
+            justifyContent: 'space-around',
+          }}
+        >
+          <div style={{ minWidth: '33.33333%' }}>{scoreView}</div>
+          <div style={{ width: '33.33333%' }}>{pointsView}</div>
+          <div style={{ width: '33.33333%' }}>{statsView}</div>
+        </div>
+      ) : (
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: 'row',
+            justifyContent: 'space-around',
+          }}
+        >
+          <div style={{ minWidth: '40%' }}>{scoreView}</div>
+          <div style={{ width: '60%' }}>
+            <Card style={{ margin: '4px 2px 2px 2px', paddingBottom: '0px' }}>
+              <CardContent
+                style={{
+                  textAlign: 'center',
+                  width: '100%',
+                  margin: '0',
+                  padding: '0px',
+                }}
+              >
+                <Tabs
+                  value={value}
+                  fullWidth={true}
+                  centered={true}
+                  onChange={this.handleTabChange}
+                  classes={{ indicator: classes.indicator }}
+                  style={{
+                    width: '100%',
+                    background: '#FFFFFF',
+                    color: '#000000',
+                  }}
                 >
-                  {scoreView}
-                  {pointsView}
-                  {statsView}
-                </SwipeableViews>
-              </div>
-            </PageTransition>
+                  <Tab label="Points" />
+                  <Tab label="Stats" />
+                </Tabs>
+              </CardContent>
+            </Card>
+            <div>
+              <SwipeableViews
+                index={this.transformIndex(value)}
+                onChangeIndex={this.handleChangeIndex}
+              >
+                {pointsView}
+                {statsView}
+              </SwipeableViews>
+            </div>
           </div>
-          <div id={'hiddenData'} style={{ display: 'none' }}>
-            {printable}
-          </div>
-          <div id={'capture'} style={{ display: 'none' }} />
         </div>
       )
-    } else {
-      return (
-        <div>
-          {header}
+
+    return (
+      <div>
+        {header}
+        <div
+          style={{
+            margin: '0 auto',
+            padding: '0',
+          }}
+        >
           {settingsView}
-          {size === 2 ? (
-            <div
-              id={'game'}
-              style={{
-                margin: '0 auto',
-                padding: '0 2px',
-                display: 'flex',
-                flexDirection: 'row',
-                justifyContent: 'space-around',
-              }}
-            >
-              <PageTransition>
-                <div style={{ minWidth: '33.33333%' }}>{scoreView}</div>
-                <div style={{ width: '33.33333%' }}>{pointsView}</div>
-                <div style={{ width: '33.33333%' }}>{statsView}</div>
-              </PageTransition>
-            </div>
-          ) : (
-            <div
-              id={'game'}
-              style={{
-                margin: '0 auto',
-                padding: '0 2px',
-                display: 'flex',
-                flexDirection: 'row',
-                justifyContent: 'space-around',
-              }}
-            >
-              <PageTransition>
-                <div style={{ minWidth: '40%' }}>{scoreView}</div>
-                <div style={{ width: '60%' }}>
-                  <Card
-                    style={{ margin: '4px 2px 2px 2px', paddingBottom: '0px' }}
-                  >
-                    <CardContent
-                      style={{
-                        textAlign: 'center',
-                        width: '100%',
-                        margin: '0',
-                        padding: '0px',
-                      }}
-                    >
-                      <Tabs
-                        value={value}
-                        fullWidth={true}
-                        centered={true}
-                        onChange={this.handleTabChange}
-                        classes={{ indicator: classes.indicator }}
-                        style={{
-                          width: '100%',
-                          background: '#FFFFFF',
-                          color: '#000000',
-                        }}
-                      >
-                        <Tab label="Points" />
-                        <Tab label="Stats" />
-                      </Tabs>
-                    </CardContent>
-                  </Card>
-                  <div style={transition && transition.style}>
-                    <SwipeableViews
-                      index={this.transformIndex(value)}
-                      onChangeIndex={this.handleChangeIndex}
-                    >
-                      {pointsView}
-                      {statsView}
-                    </SwipeableViews>
-                  </div>
-                </div>
-              </PageTransition>
-            </div>
-          )}
-          <div id={'hiddenData'} style={{ display: 'none' }}>
-            {printable}
+          <div id={'game'}>
+            <PageTransition>{page(size)}</PageTransition>
           </div>
-          <div id={'capture'} style={{ display: 'none' }} />
         </div>
-      )
-    }
+        <div id={'hiddenData'} style={{ display: 'none' }}>
+          {printable}
+        </div>
+        <div id={'capture'} style={{ display: 'none' }} />
+      </div>
+    )
   }
 }
 
