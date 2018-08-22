@@ -79,6 +79,10 @@ class GameSettings extends React.Component {
     return (
       <div>
         <Card
+          style={{
+            borderTopRightRadius: '0',
+            borderTopLeftRadius: '0',
+          }}
           className={
             display ? [Styles.show, Styles.hide].join(' ') : Styles.hide
           }
